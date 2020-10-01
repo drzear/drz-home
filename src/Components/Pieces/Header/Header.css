@@ -1,0 +1,24 @@
+.Spinning-logo {
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    .Spinning-logo {
+        animation: Spinning-logo-spin infinite 10s linear;
+    }
+}
+
+@keyframes Spinning-logo-spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.navbar {
+    height: 70px;
+    width: 100%;
+    background: var(--bg-nav);
+    color: var(--text);
+}

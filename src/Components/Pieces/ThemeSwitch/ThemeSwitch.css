@@ -1,0 +1,12 @@
+[class="custom-control-input"]:checked
+    ~ [class="custom-control-label"]::before {
+    background-color: yellow !important;
+}
+
+[class="custom-control-input"] ~ [class="custom-control-label"]::before {
+    background-color: black !important;
+}
+
+.switchForm {
+    float: right;
+}

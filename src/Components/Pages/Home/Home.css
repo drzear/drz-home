@@ -1,0 +1,72 @@
+.animated-grid {
+    height: 85vh;
+    /* margin-bottom: 200px; */
+
+    display: grid;
+    gap: 5rem;
+    margin: 5rem;
+
+    /* grid */
+    grid-template-areas:
+        "a b"
+        "c d";
+
+    /* grid-template-areas:
+    "a"
+    "b"
+    "c"
+    "d"; */
+
+    grid-template-rows: repeat(2, 40%);
+    grid-template-columns: auto auto;
+
+    --stagger-delay: 300ms;
+}
+
+@keyframes cardEntrance {
+    from {
+        opacity: 0;
+        transform: scale(0.3);
+        filter: hue-rotate(180deg);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+        filter: hue-rotate(0deg);
+    }
+}
+
+.card {
+    background-color: rgb(36, 243, 147);
+    animation: cardEntrance 700ms ease-out;
+    animation-fill-mode: backwards;
+    cursor: pointer;
+    display: inline-block;
+    align-items: center;
+    justify-content: center;
+}
+
+.card:nth-child(1) {
+    grid-area: a;
+    animation-delay: calc(1 * var(--stagger-delay));
+}
+.card:nth-child(2) {
+    grid-area: b;
+    animation-delay: calc(2 * var(--stagger-delay));
+}
+.card:nth-child(3) {
+    grid-area: c;
+    animation-delay: calc(3 * var(--stagger-delay));
+}
+.card:nth-child(4) {
+    grid-area: d;
+    animation-delay: calc(4 * var(--stagger-delay));
+}
+
+.cardText {
+    font-style: italic;
+    font-weight: bold;
+    font-size: x-large;
+    color: white;
+    text-shadow: 2px 2px #ff0000;
+}
