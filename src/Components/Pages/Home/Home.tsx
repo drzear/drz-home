@@ -17,33 +17,13 @@ class Home extends React.Component<HomeProps, HomeState> {
         super(props);
         this.state = { loaded: false };
     }
-    async setStateAsync(state) {
-        return new Promise((resolve) => {
-            this.setState(state, resolve);
-        });
-    }
+    // after 1800ms add animate-after-load class to cards so that they do not delay on hover
+    timer: any;
     componentDidMount() {
-        setTimeout(() => {
-            (async () => {
-                try {
-                    const currentClass = document.body.className;
-                    document.body.className = currentClass + " no-duration";
-                    await this.setStateAsync({ loaded: true });
-                    setTimeout(() => {
-                        document.body.className = currentClass;
-                    }, 300);
-                } catch (e) {
-                    this.setState({ loaded: true });
-                }
-            })();
-
-            // const currentClass = document.body.className;
-            // document.body.className = currentClass + " no-duration";
-            // // await this.setStateAsync({loaded:true})
-            // this.setState({ loaded: true }, () => {
-            //     // document.body.className = currentClass;
-            // });
-        }, 1800);
+        this.timer = setTimeout(() => this.setState({ loaded: true }), 1800);
+    }
+    componentWillUnmount() {
+        clearInterval(this.timer);
     }
     handleOnClick = (path: string) => {
         this.props.history.push(path);
@@ -56,9 +36,7 @@ class Home extends React.Component<HomeProps, HomeState> {
                     <div
                         className={
                             "card" +
-                            (this.state.loaded
-                                ? " animate-after-load"
-                                : " animate-on-load")
+                            (this.state.loaded ? " animate-after-load" : "")
                         }
                         style={{
                             backgroundImage: `url(${require("../../../Images/hobbit.JPG")})`,
@@ -71,9 +49,7 @@ class Home extends React.Component<HomeProps, HomeState> {
                     <div
                         className={
                             "card" +
-                            (this.state.loaded
-                                ? " animate-after-load"
-                                : " animate-on-load")
+                            (this.state.loaded ? " animate-after-load" : "")
                         }
                         style={{
                             backgroundImage: `url(${require("../../../Images/vanHills.JPG")})`,
@@ -86,9 +62,7 @@ class Home extends React.Component<HomeProps, HomeState> {
                     <div
                         className={
                             "card" +
-                            (this.state.loaded
-                                ? " animate-after-load"
-                                : " animate-on-load")
+                            (this.state.loaded ? " animate-after-load" : "")
                         }
                         style={{
                             backgroundImage: `url(${require("../../../Images/kaikoura.JPG")})`,
@@ -101,9 +75,7 @@ class Home extends React.Component<HomeProps, HomeState> {
                     <div
                         className={
                             "card" +
-                            (this.state.loaded
-                                ? " animate-after-load"
-                                : " animate-on-load")
+                            (this.state.loaded ? " animate-after-load" : "")
                         }
                         style={{
                             backgroundImage: `url(${require("../../../Images/bineBondi.JPG")})`,

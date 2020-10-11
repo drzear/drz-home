@@ -18,7 +18,6 @@ class Header extends React.Component<HeaderProps, HeaderState> {
     constructor(props) {
         super(props);
         this.state = { activeLink: this.props.history.location.pathname };
-        console.log(this.props.history.location.pathname);
     }
     handleOnClick = (path: string) => {
         this.props.history.push(path);
