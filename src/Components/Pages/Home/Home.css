@@ -1,5 +1,5 @@
 .animated-grid {
-    height: 85vh;
+    height: 80vh;
     /* margin-bottom: 200px; */
 
     display: grid;
@@ -26,8 +26,8 @@
 @keyframes cardEntrance {
     from {
         opacity: 0;
-        transform: scale(0.3);
-        filter: hue-rotate(180deg);
+        transform: scale(0.8);
+        filter: hue-rotate(90deg);
     }
     to {
         opacity: 1;
@@ -36,14 +36,51 @@
     }
 }
 
+@keyframes cardHover {
+    from {
+        transform: scale(1);
+    }
+    to {
+        transform: scale(1.1);
+    }
+}
+
+@keyframes cardHoverRelease {
+    from {
+        transform: scale(1.1);
+    }
+    to {
+        transform: scale(1);
+    }
+}
+
 .card {
-    background-color: rgb(36, 243, 147);
-    animation: cardEntrance 700ms ease-out;
-    animation-fill-mode: backwards;
+    /* background-color: rgb(36, 243, 147); */
+    background-color: black;
     cursor: pointer;
     display: inline-block;
     align-items: center;
     justify-content: center;
+    box-shadow: 3px 3px 0 0 var(--shadow-box);
+    max-width: 900px;
+}
+.animate-on-load {
+    /* transition: 0.6s; */
+    animation: cardEntrance 700ms ease-out;
+    animation-fill-mode: backwards;
+}
+.animate-after-load {
+    /* transition: 0s; */
+    animation: cardHoverRelease 300ms;
+    animation-delay: 0ms !important;
+    transform: scale(1);
+}
+.animate-after-load:hover {
+    /* box-shadow: 5px 5px 0 0 var(--shadow-box-hover); */
+    /* transition: 0s; */
+    animation: cardHover 300ms;
+    animation-delay: 0ms !important;
+    transform: scale(1.1);
 }
 
 .card:nth-child(1) {
@@ -67,6 +104,6 @@
     font-style: italic;
     font-weight: bold;
     font-size: x-large;
-    color: white;
-    text-shadow: 2px 2px #ff0000;
+    color: var(--text-home);
+    text-shadow: 3px 3px var(--text-hadow-home);
 }

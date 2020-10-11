@@ -7,21 +7,29 @@ import { withRouter } from "react-router-dom";
 import ThemeSwitch from "../ThemeSwitch/ThemeSwitch";
 
 interface HeaderProps {
-    history: string[];
+    history: any;
 }
 
-interface HeaderState {}
+interface HeaderState {
+    activeLink: string;
+}
 
 class Header extends React.Component<HeaderProps, HeaderState> {
+    constructor(props) {
+        super(props);
+        this.state = { activeLink: this.props.history.location.pathname };
+        console.log(this.props.history.location.pathname);
+    }
     handleOnClick = (path: string) => {
         this.props.history.push(path);
+        this.setState({ activeLink: this.props.history.location.pathname });
     };
     render() {
         return (
             <>
-                <Navbar bg="dark" variant="dark" className="navbar">
+                <Navbar className="navbar">
                     {/* <Navbar className="navbar"> */}
-                    <Navbar.Brand href="/">
+                    <Navbar.Brand href="/" className="navlink">
                         <img
                             alt="logo"
                             src={logo}
@@ -32,18 +40,46 @@ class Header extends React.Component<HeaderProps, HeaderState> {
                         David Ryne Zear
                     </Navbar.Brand>
                     <Nav className="ml-auto">
-                        <Nav.Link onClick={() => this.handleOnClick("/about")}>
+                        <Nav.Link
+                            className={
+                                "navlink" +
+                                (this.state.activeLink === "/about"
+                                    ? " active-navlink"
+                                    : "")
+                            }
+                            onClick={() => this.handleOnClick("/about")}
+                        >
                             About
                         </Nav.Link>
-                        <Nav.Link onClick={() => this.handleOnClick("/cv")}>
+                        <Nav.Link
+                            className={
+                                "navlink" +
+                                (this.state.activeLink === "/cv"
+                                    ? " active-navlink"
+                                    : "")
+                            }
+                            onClick={() => this.handleOnClick("/cv")}
+                        >
                             Interactive CV
                         </Nav.Link>
                         <Nav.Link
+                            className={
+                                "navlink" +
+                                (this.state.activeLink === "/contact"
+                                    ? " active-navlink"
+                                    : "")
+                            }
                             onClick={() => this.handleOnClick("/contact")}
                         >
                             Contact
                         </Nav.Link>
                         <Nav.Link
+                            className={
+                                "navlink" +
+                                (this.state.activeLink === "/biSamples"
+                                    ? " active-navlink"
+                                    : "")
+                            }
                             onClick={() => this.handleOnClick("/biSamples")}
                         >
                             BI Samples

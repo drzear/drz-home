@@ -8,34 +8,58 @@ interface HomeProps {
 }
 
 interface HomeState {
-    theme: string;
+    loaded: boolean;
 }
 
 class Home extends React.Component<HomeProps, HomeState> {
-    // BELOW DRZ GOOD EXAMPLE OF STATE AND PASSING THROUGH TO CHILD COMPONENTS
-    // constructor(props) {
-    //     super(props);
-    //     this.state = { theme: "🔌" };
-    // }
-    // themeLight: boolean = true;
-    // handleThemeClick = () => {
-    //     this.themeLight = !this.themeLight;
-    //     const theme = !this.themeLight ? "💡" : "🔌";
-    //     this.setState({ theme: theme });
-    // };
+    // remove animation from card after page has loaded
+    constructor(props) {
+        super(props);
+        this.state = { loaded: false };
+    }
+    async setStateAsync(state) {
+        return new Promise((resolve) => {
+            this.setState(state, resolve);
+        });
+    }
+    componentDidMount() {
+        setTimeout(() => {
+            (async () => {
+                try {
+                    const currentClass = document.body.className;
+                    document.body.className = currentClass + " no-duration";
+                    await this.setStateAsync({ loaded: true });
+                    setTimeout(() => {
+                        document.body.className = currentClass;
+                    }, 300);
+                } catch (e) {
+                    this.setState({ loaded: true });
+                }
+            })();
+
+            // const currentClass = document.body.className;
+            // document.body.className = currentClass + " no-duration";
+            // // await this.setStateAsync({loaded:true})
+            // this.setState({ loaded: true }, () => {
+            //     // document.body.className = currentClass;
+            // });
+        }, 1800);
+    }
     handleOnClick = (path: string) => {
         this.props.history.push(path);
     };
     render() {
         return (
             <>
-                <ThemeSwitch
-                // theme={this.state.theme}
-                // onClick={this.handleThemeClick}
-                />
+                <ThemeSwitch />
                 <section className="animated-grid">
                     <div
-                        className="card"
+                        className={
+                            "card" +
+                            (this.state.loaded
+                                ? " animate-after-load"
+                                : " animate-on-load")
+                        }
                         style={{
                             backgroundImage: `url(${require("../../../Images/hobbit.JPG")})`,
                             backgroundPosition: "center",
@@ -45,7 +69,12 @@ class Home extends React.Component<HomeProps, HomeState> {
                         <span className="cardText">About</span>
                     </div>
                     <div
-                        className="card"
+                        className={
+                            "card" +
+                            (this.state.loaded
+                                ? " animate-after-load"
+                                : " animate-on-load")
+                        }
                         style={{
                             backgroundImage: `url(${require("../../../Images/vanHills.JPG")})`,
                             backgroundPosition: "right top",
@@ -55,7 +84,12 @@ class Home extends React.Component<HomeProps, HomeState> {
                         <span className="cardText">Interactive CV</span>
                     </div>
                     <div
-                        className="card"
+                        className={
+                            "card" +
+                            (this.state.loaded
+                                ? " animate-after-load"
+                                : " animate-on-load")
+                        }
                         style={{
                             backgroundImage: `url(${require("../../../Images/kaikoura.JPG")})`,
                             backgroundPosition: "center",
@@ -65,7 +99,12 @@ class Home extends React.Component<HomeProps, HomeState> {
                         <span className="cardText">BI Samples</span>
                     </div>
                     <div
-                        className="card"
+                        className={
+                            "card" +
+                            (this.state.loaded
+                                ? " animate-after-load"
+                                : " animate-on-load")
+                        }
                         style={{
                             backgroundImage: `url(${require("../../../Images/bineBondi.JPG")})`,
                             backgroundPosition: "center top",

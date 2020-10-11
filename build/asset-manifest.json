@@ -1,0 +1,30 @@
+{
+  "files": {
+    "main.css": "/static/css/main.ae8dc66e.chunk.css",
+    "main.js": "/static/js/main.db4f2e41.chunk.js",
+    "main.js.map": "/static/js/main.db4f2e41.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.4ca4ed86.js",
+    "runtime-main.js.map": "/static/js/runtime-main.4ca4ed86.js.map",
+    "static/css/2.d9ad5f5c.chunk.css": "/static/css/2.d9ad5f5c.chunk.css",
+    "static/js/2.ab959118.chunk.js": "/static/js/2.ab959118.chunk.js",
+    "static/js/2.ab959118.chunk.js.map": "/static/js/2.ab959118.chunk.js.map",
+    "index.html": "/index.html",
+    "precache-manifest.7c2442c742087f8c36ada9403ce97f77.js": "/precache-manifest.7c2442c742087f8c36ada9403ce97f77.js",
+    "service-worker.js": "/service-worker.js",
+    "static/css/2.d9ad5f5c.chunk.css.map": "/static/css/2.d9ad5f5c.chunk.css.map",
+    "static/css/main.ae8dc66e.chunk.css.map": "/static/css/main.ae8dc66e.chunk.css.map",
+    "static/js/2.ab959118.chunk.js.LICENSE.txt": "/static/js/2.ab959118.chunk.js.LICENSE.txt",
+    "static/media/bineBondi.JPG": "/static/media/bineBondi.c903e910.JPG",
+    "static/media/hobbit.JPG": "/static/media/hobbit.734733bb.JPG",
+    "static/media/kaikoura.JPG": "/static/media/kaikoura.dcdb19c7.JPG",
+    "static/media/logo.svg": "/static/media/logo.5d5d9eef.svg",
+    "static/media/vanHills.JPG": "/static/media/vanHills.932a82ea.JPG"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.4ca4ed86.js",
+    "static/css/2.d9ad5f5c.chunk.css",
+    "static/js/2.ab959118.chunk.js",
+    "static/css/main.ae8dc66e.chunk.css",
+    "static/js/main.db4f2e41.chunk.js"
+  ]
+}

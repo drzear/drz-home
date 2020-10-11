@@ -1,0 +1,24 @@
+.about-para {
+    color: var(--text);
+    margin-left: 3vw;
+    margin-right: 3vw;
+    max-width: 1500px;
+}
+@keyframes pageEntrance {
+    from {
+        opacity: 0;
+        /* transform: rotate(-10deg); */
+        /* transform: scale(0.3); */
+        /* filter: hue-rotate(180deg); */
+    }
+    to {
+        opacity: 1;
+        /* transform: rotate(0deg); */
+        /* transform: scale(1); */
+        /* filter: hue-rotate(0deg); */
+    }
+}
+.about-div {
+    animation: pageEntrance 700ms ease-out;
+    /* animation-fill-mode: backwards; */
+}
