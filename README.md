@@ -6,6 +6,7 @@ I'll also be trying typescript with React in this project to see how they go tog
 Useful commands:
 
 run locally: npm start
+
 build project: npm run build
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
