@@ -4,7 +4,7 @@ import About from "../Components/Pages/About/About";
 import BiSamples from "../Components/Pages/BiSamples/BiSamples";
 import Contact from "../Components/Pages/Contact/Contact";
 import CV from "../Components/Pages/CV/CV";
-import { BrowserRouter, Route } from "react-router-dom";
+import { BrowserRouter, Route, Redirect, Switch } from "react-router-dom";
 import Header from "../Components/Pieces/Header/Header";
 
 class MyRouter extends React.Component {
@@ -12,16 +12,29 @@ class MyRouter extends React.Component {
         return (
             <>
                 <BrowserRouter basename="/">
-                    <Route exact path="/about" component={DefaultContainer} />
-                    <Route
-                        exact
-                        path="/biSamples"
-                        component={DefaultContainer}
-                    />
-                    <Route exact path="/cv" component={DefaultContainer} />
-                    <Route exact path="/contact" component={DefaultContainer} />
-                    <Route exact path="/home" component={HomeContainer} />
-                    <Route exact path="/" component={HomeContainer} />
+                    <Switch>
+                        <Route
+                            exact
+                            path="/about"
+                            component={DefaultContainer}
+                        />
+                        <Route
+                            exact
+                            path="/biSamples"
+                            component={DefaultContainer}
+                        />
+                        <Route exact path="/cv" component={DefaultContainer} />
+                        <Route
+                            exact
+                            path="/contact"
+                            component={DefaultContainer}
+                        />
+                        <Route exact path="/home" component={HomeContainer} />
+                        <Route exact path="/" component={HomeContainer} />
+                        <Route>
+                            <Redirect to="/" />
+                        </Route>
+                    </Switch>
                 </BrowserRouter>
             </>
         );

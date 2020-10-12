@@ -31,7 +31,7 @@ class Home extends React.Component<HomeProps, HomeState> {
     render() {
         return (
             <>
-                <ThemeSwitch />
+                <ThemeSwitch onClick={() => {}} />
                 <section className="animated-grid">
                     <div
                         className={

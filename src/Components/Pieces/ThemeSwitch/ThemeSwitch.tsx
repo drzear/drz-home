@@ -2,7 +2,9 @@ import React from "react";
 import Form from "react-bootstrap/Form";
 import "./ThemeSwitch.css";
 
-interface ThemeProps {}
+interface ThemeProps {
+    onClick: Function;
+}
 
 interface ThemeState {
     themeState: string;
@@ -25,7 +27,7 @@ export default class ThemeSwitch extends React.Component<
             themeForState = existingTheme;
             checkedBoolForState = themeForState === "light" ? false : true;
         } else {
-            themeForState = "light";
+            themeForState = "dark";
             checkedBoolForState = false;
         }
         labelForState = themeForState === "light" ? "🔌" : "💡";
@@ -49,6 +51,7 @@ export default class ThemeSwitch extends React.Component<
         });
         localStorage.setItem("themeState", themeState);
         document.body.classList.replace(oldThemeState, themeState);
+        this.props.onClick();
     };
     render() {
         return (
