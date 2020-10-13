@@ -26,16 +26,22 @@ code {
     --gray6: #12181b;
     --blue: #0084a5;
     --purple: #a82dd1;
-    --yellow: #fff565;
+    --yellow0: #faf6bb;
+    --yellow1: #fff565;
 }
 
 .light {
     --bg: var(--gray0);
-    --bg-nav: linear-gradient(to right, var(--gray1), var(--gray3));
+    --bg-nav: linear-gradient(to right, var(--yellow0), var(--yellow1));
     --bg-dropdown: var(--gray0);
     --text: var(--gray6);
+    --text-nav: var(--gray6);
+    --text-home: var(--gray0);
     --border-color: var(--blue);
     --bg-solar: var(--yellow);
+    --text-hadow-home: var(--gray6);
+    --shadow-box: var(--gray6);
+    --shadow-box-hover: var(--gray6);
 }
 
 .dark {
@@ -43,6 +49,15 @@ code {
     --bg-nav: linear-gradient(to right, var(--gray5), var(--gray6));
     --bg-dropdown: var(--gray6);
     --text: var(--gray0);
+    --text-nav: var(--yellow1);
+    --text-home: var(--gray0);
     --border-color: var(--purple);
     --bg-solar: var(--blue);
+    --text-hadow-home: var(--gray6);
+    --shadow-box: var(--gray0);
+    --shadow-box-hover: var(--gray0);
+}
+
+body.no-duration * {
+    animation-duration: 0s !important;
 }

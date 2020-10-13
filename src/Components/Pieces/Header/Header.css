@@ -3,22 +3,39 @@
 
 @media (prefers-reduced-motion: no-preference) {
     .Spinning-logo {
-        animation: Spinning-logo-spin infinite 10s linear;
+        animation: Spinning-logo-spin infinite 10s alternate;
     }
 }
 
 @keyframes Spinning-logo-spin {
-    from {
+    /* from {
         transform: rotate(0deg);
     }
     to {
         transform: rotate(360deg);
+    } */
+    from {
+        opacity: 0.5;
+    }
+    to {
+        opacity: 1;
     }
 }
 
 .navbar {
-    height: 70px;
-    width: 100%;
+    /* height: 70px;
+    width: 100%; */
     background: var(--bg-nav);
-    color: var(--text);
+}
+.navbar-collapse {
+    background: var(--bg-nav);
+    color: var(--text-nav);
+}
+
+.navlink {
+    color: var(--text-nav) !important;
+}
+
+.active-navlink {
+    font-weight: bold;
 }
