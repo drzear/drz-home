@@ -36,6 +36,7 @@ class Header extends React.Component<HeaderProps, HeaderState> {
     }
     handleOnClick = (path: string) => {
         this.props.history.push(path);
+
         this.setState({ activeLink: this.props.history.location.pathname });
     };
     handleThemeOnClick = () => {
@@ -46,9 +47,11 @@ class Header extends React.Component<HeaderProps, HeaderState> {
         } else {
             themeIsLight = false;
         }
-        this.setState({
-            activeLink: this.state.activeLink,
-            lightTheme: themeIsLight,
+        this.setState((state) => {
+            return {
+                activeLink: state.activeLink,
+                lightTheme: themeIsLight,
+            };
         });
     };
     render() {
