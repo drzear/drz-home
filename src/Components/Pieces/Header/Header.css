@@ -23,12 +23,9 @@
 }
 
 .navbar {
-    /* height: 70px;
-    width: 100%; */
     background: var(--bg-nav);
 }
 .navbar-collapse {
-    background: var(--bg-nav);
     color: var(--text-nav);
 }
 

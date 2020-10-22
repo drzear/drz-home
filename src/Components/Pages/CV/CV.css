@@ -1,0 +1,15 @@
+.cv-div {
+    animation: pageEntrance 700ms ease-out;
+    /* animation-fill-mode: backwards; */
+}
+.cv-para {
+    color: var(--text);
+    margin-left: 3vw;
+    margin-right: 3vw;
+    max-width: 1500px;
+}
+.svg,
+.text {
+    vertical-align: middle;
+    display: inline-block;
+}
