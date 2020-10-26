@@ -1,15 +1,80 @@
 .cv-div {
     animation: pageEntrance 700ms ease-out;
-    /* animation-fill-mode: backwards; */
+}
+
+.cv-div-timeline {
+    width: 33.3%;
+    position: absolute;
+}
+
+.year-text {
+    font: bold;
+    fill: var(--text);
+}
+.timeline-line {
+    stroke: var(--text);
+}
+.cv-div-container {
+    width: 66.7%;
+}
+.cv-div-text {
+    /* background: black; */
+    position: fixed;
+    width: 66.7%;
+    height: 50%;
+    right: 0;
+    margin-top: 2vh;
+    margin-left: 3vw;
+    margin-right: 3vw;
+    margin-bottom: 2vh;
+}
+
+.cv-div-chart {
+    /* background: black; */
+    position: fixed;
+    width: 66.7%;
+    right: 0;
+    bottom: 0;
+    margin-top: 2vh;
+    margin-left: 3vw;
+    margin-right: 3vw;
+    margin-bottom: 2vh;
+}
+
+.cv-div-text > div {
+    display: flex;
+    padding-bottom: 2vh;
+}
+
+/* .cv-div-text > div {
+    width: 100%;
+    margin-right: 1vw;
+    margin-left: 1vw;
+} */
+.time-location {
+    /* flex-grow: 1; */
+    padding-right: 2vw;
+}
+.title-company {
+    /* flex-grow: 1; */
 }
 .cv-para {
     color: var(--text);
-    margin-left: 3vw;
-    margin-right: 3vw;
-    max-width: 1500px;
+    /* text-align: center;
+    justify-content: center; */
 }
-.svg,
-.text {
-    vertical-align: middle;
-    display: inline-block;
+.logo {
+    /* border: 1px solid #000; */
+    /* background: white; */
+    /* max-width: 64px; */
+    max-width: 10vw;
+}
+
+@media only screen and (max-width: 900px) {
+    .cv-div-text {
+        position: absolute;
+    }
+    .cv-div-chart {
+        position: absolute;
+    }
 }

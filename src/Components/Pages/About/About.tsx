@@ -9,8 +9,11 @@ class About extends React.Component {
                     {/* <h1>About</h1> */}
                     <p className="about-para">
                         <br />
-                        Hi, my name is David 👋. Some people call me Ryne. I was
-                        born and raised in{" "}
+                        Hi, my name is David{" "}
+                        <span role="img" aria-label="wave">
+                            👋
+                        </span>
+                        . Some people call me Ryne. I was born and raised in{" "}
                         <a
                             target="_blank"
                             rel="noopener noreferrer"

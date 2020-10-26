@@ -33,6 +33,11 @@
     color: var(--text-nav) !important;
 }
 
+.navlink:hover {
+    color: white !important;
+}
+
 .active-navlink {
+    color: white !important;
     font-weight: bold;
 }

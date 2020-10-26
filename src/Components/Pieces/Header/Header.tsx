@@ -59,20 +59,20 @@ class Header extends React.Component<HeaderProps, HeaderState> {
             <>
                 <Navbar
                     collapseOnSelect
-                    // bg="dark"
-                    variant={this.state.lightTheme ? undefined : "dark"}
+                    // variant={this.state.lightTheme ? undefined : "dark"}
+                    variant="dark"
                     expand="md"
                     className="navbar"
+                    // fixed="top"
                 >
-                    {/* <Navbar className="navbar"> */}
                     <Navbar.Brand href="/" className="navlink">
-                        <img
+                        {/* <img
                             alt="logo"
                             src={logo}
                             width="30"
                             height="30"
                             className="d-inline-block align-top Spinning-logo"
-                        />{" "}
+                        />{" "} */}
                         David Ryne Zear
                     </Navbar.Brand>
                     <Navbar.Toggle
@@ -117,7 +117,7 @@ class Header extends React.Component<HeaderProps, HeaderState> {
                             >
                                 Contact
                             </Nav.Link>
-                            <Nav.Link
+                            {/* <Nav.Link
                                 className={
                                     "navlink" +
                                     (this.state.activeLink === "/biSamples"
@@ -127,7 +127,7 @@ class Header extends React.Component<HeaderProps, HeaderState> {
                                 onClick={() => this.handleOnClick("/biSamples")}
                             >
                                 BI Samples
-                            </Nav.Link>
+                            </Nav.Link> */}
                         </Nav>
                         <ThemeSwitch
                             onClick={() => this.handleThemeOnClick()}

@@ -31,11 +31,14 @@ code {
 }
 
 .light {
-    --bg: var(--gray0);
-    --bg-nav: linear-gradient(to right, var(--yellow0), var(--yellow1));
+    /* --bg: linear-gradient(to right, var(--gray3), var(--yellow1)); */
+    --bg: white;
+    /* --bg-nav: linear-gradient(to right, var(--yellow1), var(--gray3)); */
+    --bg-nav: linear-gradient(to right, var(--gray5), var(--gray6));
     --bg-dropdown: var(--gray0);
     --text: var(--gray6);
-    --text-nav: var(--gray6);
+    /* --text-nav: var(--gray6); */
+    --text-nav: var(--gray2);
     --text-home: var(--gray0);
     --border-color: var(--blue);
     --bg-solar: var(--yellow);
@@ -45,11 +48,11 @@ code {
 }
 
 .dark {
-    --bg: var(--gray5);
+    --bg: linear-gradient(to right, var(--gray6), var(--gray5));
     --bg-nav: linear-gradient(to right, var(--gray5), var(--gray6));
     --bg-dropdown: var(--gray6);
     --text: var(--gray0);
-    --text-nav: var(--yellow1);
+    --text-nav: var(--gray2);
     --text-home: var(--gray0);
     --border-color: var(--purple);
     --bg-solar: var(--blue);
