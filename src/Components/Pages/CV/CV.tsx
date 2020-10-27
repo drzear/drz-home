@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from "react";
 import "./CV.css";
-// import * as d3 from "d3";
 import { useSpring, animated } from "react-spring";
-import { cvData, colorArrays } from "./cvData";
+import { cvData, colorArrays, cvDataInt } from "./cvData";
 import ReactEcharts from "echarts-for-react";
 import echarts from "echarts";
-import world from "../../../Images/world.json";
+import world from "../../../Images/world_echarts_big.json";
 
 const Line = (props) => {
     const spring = useSpring({
@@ -34,18 +33,174 @@ const Line = (props) => {
             x2={props.x2 * props.svgWidth}
             y1={props.y1 * props.svgHeight}
             y2={props.y2 * props.svgHeight}
-            // y1={spring.y1}
-            // y2={spring.y2}
-            // stroke={props.stroke}
             stroke={spring.color}
             strokeWidth={spring.width}
-            // onClick={props.onMouseClick}
             onMouseEnter={props.onMouseEnter}
-            // onMouseLeave={props.onMouseLeave}
-            // strokeLinecap="round"
             style={{ cursor: "pointer" }}
         />
     );
+};
+
+const getEchartOption = (selection: cvDataInt) => {
+    let countries = [
+        "Sweden",
+        "United States",
+        "New Zealand",
+        "Australia",
+        "Nepal",
+        "Cambodia",
+        "Thailand",
+        "Germany",
+    ];
+    let mapData: any[] = [];
+    countries.forEach((country) => {
+        mapData.push({
+            name: country,
+            value: country === selection.country ? 2 : 1,
+            label: { show: false },
+        });
+    });
+    const rawData = [
+        {
+            name: "Iowa City",
+            value: [-90, 41, "Iowa City" === selection.city ? 4 : 3],
+        },
+        {
+            name: "Coralville",
+            value: [-90, 41, "Coralville" === selection.city ? 4 : 3],
+        },
+        {
+            name: "Stockholm",
+            value: [18, 59.5, "Stockholm" === selection.city ? 4 : 3],
+        },
+        {
+            name: "NYC",
+            value: [-74, 41, "NYC" === selection.city ? 4 : 3],
+        },
+    ];
+    let scatterData: any[] = [];
+    let effectScatterData: any[] = [];
+    rawData.forEach((el, i) => {
+        if (el.name === selection.city) {
+            effectScatterData.push(el);
+        } else {
+            scatterData.push(el);
+        }
+    });
+    // seperate scatter and 1 effectScatter data
+    return {
+        geo: {
+            name: "World Map",
+            type: "map",
+            map: "WORLD",
+            roam: true,
+            show: true,
+            selectedMode: "single",
+            label: {
+                emphasis: {
+                    color: "rgb(255, 255, 255)",
+                    show: false,
+                },
+            },
+            zoom: 1.25,
+            // itemStyle: {
+            //     normal: {
+            //         areaColor: "#323c48",
+            //         borderColor: "#111",
+            //     },
+            //     emphasis: {
+            //         opacity: 0.4,
+            //         areaColor: "#2a333d",
+            //     },
+            // },
+        },
+        visualMap: {
+            left: "right",
+            min: 1,
+            max: 4,
+            inRange: {
+                color: ["yellowgreen", "yellow", "blue", "orange"],
+            },
+            text: ["High", "Low"], // 文本，默认为数值文本
+            calculable: true,
+            show: false,
+        },
+        tooltip: {
+            trigger: "item",
+            showDelay: 0,
+            transitionDuration: 0.2,
+            formatter: function (params) {
+                let oldValue = (params.value + "").split(".");
+                let value = oldValue[0].replace(
+                    /(\d{1,3})(?=(?:\d{3})+(?!\d))/g,
+                    "$1,"
+                );
+                // return params.seriesName + "<br/>" + params.name + ": " + value;
+                return params.name;
+            },
+        },
+        series: [
+            {
+                type: "scatter",
+                coordinateSystem: "geo",
+                zlevel: 4,
+                // animation: true,
+                data: scatterData,
+                encode: {
+                    value: 2,
+                },
+                symbolSize: function (val) {
+                    return val[2] ^ 10;
+                },
+                showEffectOn: "render",
+                rippleEffect: {
+                    brushType: "stroke",
+                },
+                hoverAnimation: true,
+            },
+            {
+                type: "effectScatter",
+                coordinateSystem: "geo",
+                zlevel: 4,
+                // animation: true,
+                data: effectScatterData,
+                encode: {
+                    value: 2,
+                },
+                symbolSize: function (val) {
+                    return val[2] ^ 10;
+                },
+                showEffectOn: "render",
+                rippleEffect: {
+                    brushType: "stroke",
+                },
+                hoverAnimation: true,
+            },
+            {
+                name: "World Map",
+                type: "map",
+                // roam: true,
+                // map: "WORLD",
+                geoIndex: 0,
+                emphasis: {
+                    label: {
+                        // show: true,
+                    },
+                },
+                // silent: true,  // disables mouse events
+                data: mapData,
+                // [
+                //     { name: "Germany", value: 1, label: { show: false } },
+                //     {
+                //         name: "New Zealand",
+                //         value: 1,
+                //         label: { show: false },
+                //     },
+                //     { name: "United States", value: 1, label: { show: false } },
+                // ],
+            },
+        ],
+    };
 };
 
 function parseData(): any[] {
@@ -145,17 +300,17 @@ function CV() {
             setWidth(window.innerWidth);
             setHeight(window.innerHeight);
         };
+
+        echarts.registerMap("WORLD", world, {});
+
         window.addEventListener("resize", handleResize);
-
-        echarts.registerMap("world", world, {});
-
         return () => {
             window.removeEventListener("resize", handleResize);
         };
     }, []);
 
     // mouse hover over chart
-    const [currentlyHovered, setCurrentlyHovered] = useState(0);
+    const [currentlyHovered, setCurrentlyHovered] = useState(cvData.length - 1);
     // const [currentlySelected, setCurrentlySelected] = useState(-1);
     const handleLineMouseEnter = (line: number) => {
         setCurrentlyHovered(line);
@@ -296,37 +451,11 @@ function CV() {
                 </div>
                 <div className="cv-div-chart">
                     <ReactEcharts
-                        option={{
-                            xAxis: {
-                                type: "category",
-                                data: [
-                                    "Mon",
-                                    "Tue",
-                                    "Wed",
-                                    "Thu",
-                                    "Fri",
-                                    "Sat",
-                                    "Sun",
-                                ],
-                            },
-                            yAxis: {
-                                type: "value",
-                            },
-                            series: [
-                                {
-                                    data: [
-                                        820,
-                                        932,
-                                        901,
-                                        934,
-                                        1290,
-                                        1330,
-                                        1320,
-                                    ],
-                                    type: "line",
-                                },
-                            ],
-                        }}
+                        option={getEchartOption(
+                            reverseCvData[currentlyHovered]
+                        )}
+                        lazyUpdate={true}
+                        style={{ height: "500px", width: "100%" }}
                     />
                 </div>
             </div>
