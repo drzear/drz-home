@@ -7,8 +7,12 @@ import echarts from "echarts";
 import world from "../../../Images/world_echarts_big.json";
 
 const Line = (props) => {
+    const widthMultiplier: number = props.svgWidth / 0.25 <= 700 ? 0.3 : 0.1;
     const spring = useSpring({
-        width: 0.1 * props.svgWidth * (props.currentlyHovered ? 1.5 : 1),
+        width:
+            widthMultiplier *
+            props.svgWidth *
+            (props.currentlyHovered ? 1.5 : 1),
         y1:
             props.y1 * props.svgHeight -
             props.svgHeight * (props.currentlyHovered ? 0.01 : 0.0),
@@ -17,7 +21,10 @@ const Line = (props) => {
             props.svgHeight * (props.currentlyHovered ? 0.01 : 0.0),
         color: props.currentlyHovered ? "yellow" : props.stroke,
         from: {
-            width: 0.1 * props.svgWidth * (props.currentlyHovered ? 1.5 : 1),
+            width:
+                widthMultiplier *
+                props.svgWidth *
+                (props.currentlyHovered ? 1.5 : 1),
             y1:
                 props.y1 * props.svgHeight -
                 props.svgHeight * (props.currentlyHovered ? 0.0 : 0.01),

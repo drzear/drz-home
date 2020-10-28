@@ -70,11 +70,11 @@
     max-width: 10vw;
 }
 
-@media only screen and (max-width: 900px) {
+/* @media only screen and (max-width: 900px) {
     .cv-div-text {
         position: absolute;
     }
     .cv-div-chart {
         position: absolute;
     }
-}
+} */
