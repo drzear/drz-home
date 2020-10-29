@@ -1,9 +1,3 @@
-// import emsl from "../../../Images/Logos/emsl.png";
-// import idt from "../../../Images/Logos/idt.png";
-// import pearson from "../../../Images/Logos/pearson.png";
-// import rhg from "../../../Images/Logos/rhg.png";
-// import uiowa from "../../../Images/Logos/uiowa.png";
-
 export interface cvDataInt {
     startYYYYMM: number;
     startDate: string;
@@ -11,7 +5,7 @@ export interface cvDataInt {
     endDate: string;
     location: string;
     city: string;
-    country: string;
+    country: string[];
     title: string;
     category: string;
     company: string;
@@ -30,7 +24,7 @@ export const cvData: cvDataInt[] = [
         endDate: "Present",
         location: "Stockholm, Sweden",
         city: "Stockholm",
-        country: "Sweden",
+        country: ["Sweden"],
         title: "BI Revenue Management Developer EMEA",
         category: "Work",
         company: "Radisson Hotel Group",
@@ -44,7 +38,7 @@ export const cvData: cvDataInt[] = [
         endDate: "October 2019",
         location: "Stockholm, Sweden",
         city: "Stockholm",
-        country: "Sweden",
+        country: ["Sweden"],
         title: "Data Analyst",
         category: "Work",
         company: "Radisson Hotel Group",
@@ -57,17 +51,39 @@ export const cvData: cvDataInt[] = [
         image: "rhg.png",
     },
     {
+        startYYYYMM: 201705,
+        startDate: "June 2017",
+        endYYYYMM: 201801,
+        endDate: "December 2017",
+        location: "Stockholm, Sweden",
+        city: "Stockholm",
+        country: ["Sweden"],
+        title: "Miscelaneous coursework",
+        category: "Education",
+        company: "N/A",
+        description: [
+            "• Introduction to Computer Science Using Python (6.00.1x)",
+            "• Computational Thinking and Data Science (6.00.2x).",
+            "• Data Science Specialization (9-course set using R).",
+            "• Data Analysis for Life Sciences 1-5: R statistics, linear/matrix algebra, high dimensional data analysis, and using Bioconductor for gene analysis.",
+        ],
+        image: "sto.JPG",
+    },
+    {
         startYYYYMM: 201507,
         startDate: "July 2015",
         endYYYYMM: 201705,
         endDate: "May 2017",
         location: "Iowa City, IA",
         city: "Iowa City",
-        country: "United States",
+        country: ["United States"],
         title: "Scoring Supervisor",
         category: "Work",
         company: "Pearson",
-        description: [""],
+        description: [
+            "• Analyzed scoring patterns to identify problematic trends and ensure that students received the correct score.",
+            "• Supervised work of other scorers.",
+        ],
         image: "pearson.png",
     },
     {
@@ -76,13 +92,13 @@ export const cvData: cvDataInt[] = [
         endYYYYMM: 201502,
         endDate: "February 2015",
         location: "Gronau-Epe, DE",
-        city: "",
-        country: "Germany",
-        title: "Backpacker",
+        city: "Epe",
+        country: ["Germany"],
+        title: "",
         category: "Travel",
         company: "N/A",
-        description: [""],
-        image: "idt.png",
+        description: ["Spent time in:", "• Munich.", "• Gronau-Epe."],
+        image: "travel.JPG",
     },
     {
         startYYYYMM: 201410,
@@ -91,12 +107,15 @@ export const cvData: cvDataInt[] = [
         endDate: "December 2014",
         location: "Thailand and Cambodia",
         city: "",
-        country: "Thailand",
+        country: ["Thailand", "Cambodia"],
         title: "Backpacker",
         category: "Travel",
         company: "N/A",
-        description: [""],
-        image: "idt.png",
+        description: [
+            "• Analyzed scoring patterns to identify problematic trends and ensure that students received the correct score.",
+            "• Supervised work of other scorers.",
+        ],
+        image: "camb.JPG",
     },
     {
         startYYYYMM: 201409,
@@ -105,12 +124,12 @@ export const cvData: cvDataInt[] = [
         endDate: "October 2014",
         location: "Nepal",
         city: "",
-        country: "Nepal",
+        country: ["Nepal"],
         title: "Backpacker",
         category: "Travel",
         company: "N/A",
         description: [""],
-        image: "idt.png",
+        image: "nepal.JPG",
     },
     {
         startYYYYMM: 201408,
@@ -119,12 +138,12 @@ export const cvData: cvDataInt[] = [
         endDate: "September 2014",
         location: "Australia",
         city: "",
-        country: "Australia",
+        country: ["Australia"],
         title: "Backpacker",
         category: "Travel",
         company: "N/A",
         description: [""],
-        image: "idt.png",
+        image: "aus.jpg",
     },
     {
         startYYYYMM: 201407,
@@ -133,12 +152,12 @@ export const cvData: cvDataInt[] = [
         endDate: "August 2014",
         location: "New Zealand",
         city: "",
-        country: "New Zealand",
+        country: ["New Zealand"],
         title: "Backpacker",
         category: "Travel",
         company: "N/A",
         description: [""],
-        image: "idt.png",
+        image: "nz.JPG",
     },
     {
         startYYYYMM: 201007,
@@ -147,11 +166,15 @@ export const cvData: cvDataInt[] = [
         endDate: "July 2014",
         location: "Coralville, IA",
         city: "Coralville",
-        country: "United States",
+        country: ["United States"],
         title: "Production Scientist II",
         category: "Work",
         company: "Integrated DNA Technologies",
-        description: [""],
+        description: [
+            "• Analyzed finished DNA/RNA data to ensure correct product was produced using a variety of analysis tools.",
+            "• Troubleshot production issues using Microsoft AX database software in combination with Excel.",
+            "• Trained colleagues on all departmental processes.",
+        ],
         image: "idt.png",
     },
     {
@@ -161,11 +184,14 @@ export const cvData: cvDataInt[] = [
         endDate: "October 2009",
         location: "New York, NY",
         city: "NYC",
-        country: "United States",
+        country: ["United States"],
         title: "Lead Analyst",
         category: "Work",
         company: "EMSL Analytical",
-        description: [""],
+        description: [
+            "• Analyzed data using proprietary Oracle-based database software to create client reports meeting short deadlines.",
+            "• Trained and supervised co-workers in all aspects of sample preparation, data analysis, and reporting.",
+        ],
         image: "emsl.png",
     },
     {
@@ -175,11 +201,16 @@ export const cvData: cvDataInt[] = [
         endDate: "July 2007",
         location: "Iowa City, IA",
         city: "Iowa City",
-        country: "United States",
+        country: ["United States"],
         title: "B.S., Biology, Ecology and Evolutionary Biology",
         category: "Education",
         company: "The University of Iowa",
-        description: [""],
+        description: [
+            "• Course highlights: statistics, population genetics & molecular evolution, organic chemistry, phylogenetics, and ecology. Focus on quantitative analysis of ecological systems.",
+            "• Experience in writing scientific papers and presenting research.",
+            "",
+            "Publication: Ahmed Moustafa, CX Chan, Megan Danforth, David Zear, Hiba Ahmed, Nagnath Jadhav, Trevor Savage, Debashish Bhattacharya. A phylogenomic approach for studying plastid endosymbiosis. Genome Informatics 21: 165-176 (2008) 165. PMID: 19425156.",
+        ],
         image: "uiowa.svg",
     },
 ];

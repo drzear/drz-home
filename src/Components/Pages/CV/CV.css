@@ -69,12 +69,23 @@
     /* max-width: 64px; */
     max-width: 10vw;
 }
-
-/* @media only screen and (max-width: 900px) {
+@media only screen and (max-width: 700px) {
     .cv-div-text {
-        position: absolute;
+        /* position: absolute; */
+        font-size: small;
     }
     .cv-div-chart {
-        position: absolute;
+        /* position: absolute; */
+        margin-bottom: 0vh;
     }
-} */
+}
+@media only screen and (max-width: 500px) {
+    .cv-div-text {
+        /* position: absolute; */
+        font-size: x-small;
+    }
+    .cv-div-chart {
+        /* position: absolute; */
+        margin-bottom: 0vh;
+    }
+}
