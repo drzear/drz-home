@@ -28,7 +28,7 @@ export const cvData: cvDataInt[] = [
         location: "Stockholm, Sweden",
         city: "Stockholm",
         country: ["Sweden"],
-        title: "BI Revenue Management Developer EMEA",
+        title: "BI Revenue Management Developer",
         category: "Work",
         company: "Radisson Hotel Group",
         description: [

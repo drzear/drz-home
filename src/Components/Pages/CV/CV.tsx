@@ -6,6 +6,8 @@ import ReactEcharts from "echarts-for-react";
 import echarts from "echarts";
 import world from "../../../Images/world_echarts_big.json";
 import Button from "react-bootstrap/Button";
+import OverlayTrigger from "react-bootstrap/OverlayTrigger";
+import Tooltip from "react-bootstrap/Tooltip";
 
 const Line = (props) => {
     const widthMultiplier: number = props.svgWidth / 0.25 <= 700 ? 0.3 : 0.1;
@@ -199,6 +201,14 @@ function parseData(): any[] {
     return yearMarkers;
 }
 
+const renderTooltip = (props) => (
+    <Tooltip id="button-tooltip" {...props}>
+        <b>Mobile:</b> Swipe left and right move through the timeline.{" "}
+        <b>Desktop:</b> Left and right arrow on keyboard can navigate the
+        timeline as well as hovering over a time period.
+    </Tooltip>
+);
+
 function CV() {
     // window resizing
     const [width, setWidth] = useState(window.innerWidth);
@@ -292,13 +302,34 @@ function CV() {
     const reverseCvData = [...cvData].reverse();
     return (
         <>
-            <div className="cv-div">
+            <div
+                className="cv-div"
+                onTouchStart={handleTouchStart}
+                onTouchMove={handleTouchMove}
+                onTouchEnd={handleTouchEnd}
+            >
                 <div className="cv-div-timeline">
+                    <OverlayTrigger
+                        placement="right"
+                        delay={{ show: 250, hide: 400 }}
+                        overlay={renderTooltip}
+                    >
+                        <Button
+                            style={{
+                                width: 0.1 * svgWidth,
+                                marginTop: "1vh",
+                                marginBottom: "1vh",
+                                marginRight: 0.01 * svgWidth,
+                            }}
+                        >
+                            <i>i</i>
+                        </Button>
+                    </OverlayTrigger>
                     <Button
                         onClick={handleNextClick}
                         variant="secondary"
                         style={{
-                            width: 0.49 * svgWidth,
+                            width: 0.44 * svgWidth,
                             marginTop: "1vh",
                             marginBottom: "1vh",
                             marginRight: 0.01 * svgWidth,
@@ -310,7 +341,7 @@ function CV() {
                         onClick={handleBackClick}
                         variant="secondary"
                         style={{
-                            width: 0.49 * svgWidth,
+                            width: 0.44 * svgWidth,
                             marginTop: "1vh",
                             marginBottom: "1vh",
                             marginLeft: 0.01 * svgWidth,
@@ -375,12 +406,7 @@ function CV() {
                         })}
                     </svg>
                 </div>
-                <div
-                    className="cv-div-text"
-                    onTouchStart={handleTouchStart}
-                    onTouchMove={handleTouchMove}
-                    onTouchEnd={handleTouchEnd}
-                >
+                <div className="cv-div-text">
                     <div>
                         <div className="time-location">
                             <img
@@ -448,7 +474,7 @@ function CV() {
                             reverseCvData[currentlyHovered]
                         )}
                         lazyUpdate={true}
-                        style={{ maxHeight: "500px", width: "100%" }}
+                        className="world-map"
                     />
                 </div>
             </div>

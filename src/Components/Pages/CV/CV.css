@@ -56,6 +56,10 @@
 .logo {
     max-width: 10vw;
 }
+.world-map {
+    max-height: "500px";
+    width: "100%";
+}
 @media only screen and (max-height: 900px) {
     .cv-div-text {
         font-size: small;
@@ -70,6 +74,9 @@
     }
     .cv-div-chart {
         margin-bottom: 0vh;
+    }
+    .world-map {
+        max-height: 150px;
     }
 }
 @media only screen and (max-height: 650px) {
