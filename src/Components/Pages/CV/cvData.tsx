@@ -11,6 +11,9 @@ export interface cvDataInt {
     company: string;
     description: string[];
     image: string;
+    markedCities: any[]; // { name: "city's name", value: [long, lat, sizeOfMarker] }
+    zoom: number; // default should be 1.25
+    center: number[]; // default should be 0
 }
 
 const date = new Date();
@@ -28,8 +31,21 @@ export const cvData: cvDataInt[] = [
         title: "BI Revenue Management Developer EMEA",
         category: "Work",
         company: "Radisson Hotel Group",
-        description: [""],
+        description: [
+            "• Create business intelligence dashboards using Angular (typescript/HTML/CSS).",
+            "• Model data in and maintain MySQL and Clickhouse databases.",
+            "• Create new data pipelines from source to dashboard (e.g. source db -> RHG database -> modeled data -> delivered to front-end).",
+            "• Work from Stockholm as part of a remote geographically distributed team that was based in Brussels.",
+        ],
         image: "rhg.png",
+        markedCities: [
+            {
+                name: "Stockholm",
+                value: [18.0686, 59.3293, 4],
+            },
+        ],
+        zoom: 1.25,
+        center: [0, 0],
     },
     {
         startYYYYMM: 201801,
@@ -49,6 +65,14 @@ export const cvData: cvDataInt[] = [
             "• Worked with stakeholders to create and maintain tools to facilitate revenue management and drive revenues.",
         ],
         image: "rhg.png",
+        markedCities: [
+            {
+                name: "Stockholm",
+                value: [18.0686, 59.3293, 4],
+            },
+        ],
+        zoom: 1.25,
+        center: [0, 0],
     },
     {
         startYYYYMM: 201705,
@@ -58,7 +82,7 @@ export const cvData: cvDataInt[] = [
         location: "Stockholm, Sweden",
         city: "Stockholm",
         country: ["Sweden"],
-        title: "Miscelaneous coursework",
+        title: "Miscellaneous coursework",
         category: "Education",
         company: "N/A",
         description: [
@@ -68,6 +92,14 @@ export const cvData: cvDataInt[] = [
             "• Data Analysis for Life Sciences 1-5: R statistics, linear/matrix algebra, high dimensional data analysis, and using Bioconductor for gene analysis.",
         ],
         image: "sto.JPG",
+        markedCities: [
+            {
+                name: "Stockholm",
+                value: [18.0686, 59.3293, 4],
+            },
+        ],
+        zoom: 1.25,
+        center: [0, 0],
     },
     {
         startYYYYMM: 201507,
@@ -85,6 +117,14 @@ export const cvData: cvDataInt[] = [
             "• Supervised work of other scorers.",
         ],
         image: "pearson.png",
+        markedCities: [
+            {
+                name: "Iowa City",
+                value: [-91.5302, 41.6611, 4],
+            },
+        ],
+        zoom: 1.25,
+        center: [0, 0],
     },
     {
         startYYYYMM: 201412,
@@ -97,8 +137,16 @@ export const cvData: cvDataInt[] = [
         title: "",
         category: "Travel",
         company: "N/A",
-        description: ["Spent time in:", "• Munich.", "• Gronau-Epe."],
+        description: [""],
         image: "travel.JPG",
+        markedCities: [
+            {
+                name: "Epe",
+                value: [7.0289, 52.1841, 4],
+            },
+        ],
+        zoom: 1.25,
+        center: [0, 0],
     },
     {
         startYYYYMM: 201410,
@@ -111,11 +159,22 @@ export const cvData: cvDataInt[] = [
         title: "Backpacker",
         category: "Travel",
         company: "N/A",
-        description: [
-            "• Analyzed scoring patterns to identify problematic trends and ensure that students received the correct score.",
-            "• Supervised work of other scorers.",
-        ],
+        description: [""],
         image: "camb.JPG",
+        markedCities: [
+            { name: "Bangkok", value: [100.5018, 13.7563, 3] },
+            { name: "Ayutthaya", value: [100.5877, 14.3692, 3] },
+            { name: "Lopburi", value: [100.6534, 14.7995, 3] },
+            { name: "Chiang Mai", value: [98.9853, 18.7883, 3] },
+            { name: "Doi Inthanon", value: [98.4871, 18.588, 3] },
+            { name: "Pai", value: [98.4405, 19.3582, 3] },
+            { name: "Chiang Rai", value: [99.8406, 19.9105, 3] },
+            { name: "Khao Yai", value: [101.3722, 14.4387, 3] },
+            { name: "Krong Siem Reap", value: [103.8564, 13.3633, 3] },
+            { name: "Angkor Wat", value: [103.867, 13.4125, 3] },
+        ],
+        zoom: 9,
+        center: [100, 12],
     },
     {
         startYYYYMM: 201409,
@@ -130,6 +189,14 @@ export const cvData: cvDataInt[] = [
         company: "N/A",
         description: [""],
         image: "nepal.JPG",
+        markedCities: [
+            { name: "Dhulikhel", value: [85.5561, 27.6253, 3] },
+            { name: "Kathmandu", value: [85.324, 27.7172, 3] },
+            { name: "Pokhara", value: [83.9856, 28.2096, 3] },
+            { name: "Pothana", value: [83.8303, 28.3132, 3] },
+        ],
+        zoom: 13,
+        center: [85.324, 27.7172],
     },
     {
         startYYYYMM: 201408,
@@ -144,6 +211,18 @@ export const cvData: cvDataInt[] = [
         company: "N/A",
         description: [""],
         image: "aus.jpg",
+        markedCities: [
+            { name: "Adelaide", value: [138.6007, -34.9285, 3] },
+            { name: "Melbourne", value: [144.9631, -37.8136, 3] },
+            { name: "Sydney", value: [151.2093, -33.8688, 3] },
+            { name: "Byron Bay", value: [153.602, -28.6474, 3] },
+            { name: "Gold Coast", value: [153.4, -28.0167, 3] },
+            { name: "Noosa", value: [152.9677, -26.3645, 3] },
+            { name: "Whitsundays", value: [148.1893, -20.3441, 3] },
+            { name: "Cairns", value: [145.7781, -16.9186, 3] },
+        ],
+        zoom: 5,
+        center: [133.7751, -25.2744],
     },
     {
         startYYYYMM: 201407,
@@ -158,6 +237,37 @@ export const cvData: cvDataInt[] = [
         company: "N/A",
         description: [""],
         image: "nz.JPG",
+        markedCities: [
+            { name: "Paihia", value: [174.091, -35.2821, 3] },
+            { name: "Auckland", value: [174.763336, -36.848461, 3] },
+            { name: "Christchurch", value: [172.639847, -43.52565, 3] },
+            { name: "Thames", value: [175.5491, -37.1479, 3] },
+            { name: "Cathedral Cove", value: [175.79, -36.8277, 3] },
+            { name: "Matamata", value: [175.7817, -37.8132, 3] },
+            { name: "Hamilton", value: [175.273392, -37.730675, 3] },
+            { name: "Waitomo", value: [175.098572, -38.261894, 3] },
+            { name: "Rotorua", value: [176.2378, -38.1446, 3] },
+            { name: "Taupo", value: [176.070206, -38.685692, 3] },
+            { name: "Mount Tongariro", value: [175.6358, -39.1296, 3] },
+            { name: "Napier", value: [176.9136, -39.4919, 3] },
+            { name: "Wellington", value: [174.777969, -41.276825, 3] },
+            { name: "Picton", value: [174.0057, -41.293, 3] },
+            { name: "Motueka", value: [173.0112, -41.1101, 3] },
+            { name: "Karamea", value: [172.1282, -41.2509, 3] },
+            { name: "Westport", value: [171.5928, -41.7669, 3] },
+            { name: "Franz Josef Glacier", value: [170.1819, -43.3873, 3] },
+            { name: "Wanaka", value: [169.1417, -44.6943, 3] },
+            { name: "Queenstown", value: [168.6616, -45.0302, 3] },
+            { name: "Milford Sound", value: [167.8974, -44.6414, 3] },
+            { name: "Manapouri", value: [167.609, -45.5662, 3] },
+            { name: "Invercargill", value: [168.3615, -46.4179, 3] },
+            { name: "The Catlins", value: [169.1972, -46.4636, 3] },
+            { name: "Dunedin", value: [170.4911, -45.8668, 3] },
+            { name: "Lake Tekapo", value: [170.4762, -44.0041, 3] },
+            { name: "Kaikoura", value: [173.6795, -42.3997, 3] },
+        ],
+        zoom: 13,
+        center: [174.886, -40.9006],
     },
     {
         startYYYYMM: 201007,
@@ -176,6 +286,14 @@ export const cvData: cvDataInt[] = [
             "• Trained colleagues on all departmental processes.",
         ],
         image: "idt.png",
+        markedCities: [
+            {
+                name: "Coralville",
+                value: [-91.5302, 41.6611, 4],
+            },
+        ],
+        zoom: 1.25,
+        center: [0, 0],
     },
     {
         startYYYYMM: 200806,
@@ -189,10 +307,18 @@ export const cvData: cvDataInt[] = [
         category: "Work",
         company: "EMSL Analytical",
         description: [
-            "• Analyzed data using proprietary Oracle-based database software to create client reports meeting short deadlines.",
+            "• Analyzed data using proprietary Oracle-based database software to create client reports while meeting short deadlines.",
             "• Trained and supervised co-workers in all aspects of sample preparation, data analysis, and reporting.",
         ],
         image: "emsl.png",
+        markedCities: [
+            {
+                name: "NYC",
+                value: [-74.006, 40.7128, 4],
+            },
+        ],
+        zoom: 1.25,
+        center: [0, 0],
     },
     {
         startYYYYMM: 200308,
@@ -206,17 +332,28 @@ export const cvData: cvDataInt[] = [
         category: "Education",
         company: "The University of Iowa",
         description: [
-            "• Course highlights: statistics, population genetics & molecular evolution, organic chemistry, phylogenetics, and ecology. Focus on quantitative analysis of ecological systems.",
+            "• Focus on quantitative analysis of ecological systems.",
             "• Experience in writing scientific papers and presenting research.",
+            "• Dean's List",
+            "",
+            "Course highlights: statistics, population genetics & molecular evolution, organic chemistry, phylogenetics, and ecology.",
             "",
             "Publication: Ahmed Moustafa, CX Chan, Megan Danforth, David Zear, Hiba Ahmed, Nagnath Jadhav, Trevor Savage, Debashish Bhattacharya. A phylogenomic approach for studying plastid endosymbiosis. Genome Informatics 21: 165-176 (2008) 165. PMID: 19425156.",
         ],
         image: "uiowa.svg",
+        markedCities: [
+            {
+                name: "Iowa City",
+                value: [-91.5302, 41.6611, 4],
+            },
+        ],
+        zoom: 1.25,
+        center: [0, 0],
     },
 ];
 
 export const colorArrays = {
-    Work: ["gray", "darkgray"],
-    Education: ["rgb(138, 43, 226)", "rgb(138, 43, 226)"],
-    Travel: ["orange", "rgb(255, 102, 0)"],
+    Work: ["rgba(26, 154, 213, 0.7)", "rgba(125, 172, 194, 0.7)"],
+    Education: ["rgba(175, 125, 221, 0.7)", "rgba(137, 43, 226, 0.7)"],
+    Travel: ["rgba(255, 165, 0, 0.7)", "rgba(255, 102, 0, 0.7)"],
 };
