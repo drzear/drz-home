@@ -78,13 +78,13 @@ const SlideShow = (props: { data: cvDataInt }) => {
             <CSSTransition
                 key={currentImage}
                 timeout={500}
-                classNames="image-transition"
+                classNames="slideshow-transition"
             >
                 <img
                     src={require("../../../Images/SlideShow/" +
                         sampleArray[currentImage] +
                         "")}
-                    className="slideshow"
+                    className="slideshow-image"
                     alt=""
                 />
             </CSSTransition>
@@ -344,12 +344,12 @@ function CV() {
     return (
         <>
             <div
-                className="cv-div"
+                className="cv-container"
                 onTouchStart={handleTouchStart}
                 onTouchMove={handleTouchMove}
                 onTouchEnd={handleTouchEnd}
             >
-                <div className="cv-div-timeline">
+                <div className="timeline-div">
                     <OverlayTrigger
                         placement="right"
                         delay={{ show: 250, hide: 400 }}
@@ -361,6 +361,7 @@ function CV() {
                                 marginTop: "1vh",
                                 marginBottom: "1vh",
                                 marginRight: 0.01 * svgWidth,
+                                marginLeft: 0.01 * svgWidth,
                             }}
                         >
                             <i>i</i>
@@ -415,7 +416,7 @@ function CV() {
                         {yearMarkers.map((el, i) => {
                             return (
                                 <text
-                                    className="year-text"
+                                    className="timeline-year-text"
                                     x={0.15 * svgWidth}
                                     y={el.position * svgHeight - 5}
                                     key={i}
@@ -443,15 +444,9 @@ function CV() {
                         })}
                     </svg>
                 </div>
-                {/* <TransitionGroup mode="out-in">
-                    <CSSTransition
-                        key={currentlyHovered}
-                        timeout={500}
-                        classNames="cv-div-transition"
-                    > */}
-                <div className="cv-div-text">
-                    <div>
-                        <div className="time-location">
+                <div className="info-div">
+                    <div className="text-div">
+                        <div className="logo-div top-3-div">
                             <img
                                 src={require("../../../Images/Logos/" +
                                     reverseCvData[currentlyHovered].image +
@@ -460,8 +455,8 @@ function CV() {
                                 alt=""
                             />
                         </div>
-                        <div className="title-company">
-                            <span className="cv-para">
+                        <div className="title-company top-3-div">
+                            <span className="para">
                                 <span role="img" aria-label="job title">
                                     👔
                                 </span>
@@ -473,8 +468,8 @@ function CV() {
                                 {reverseCvData[currentlyHovered].company}
                             </span>
                         </div>
-                        <div className="time-location">
-                            <span className="cv-para">
+                        <div className="top-3-div">
+                            <span className="para">
                                 <span role="img" aria-label="time period">
                                     🕢
                                 </span>
@@ -498,7 +493,7 @@ function CV() {
                             reverseCvData[currentlyHovered].category ===
                             "Travel"
                                 ? "slideshow-div"
-                                : ""
+                                : "text-div"
                         }
                     >
                         {reverseCvData[currentlyHovered].category !==
@@ -508,7 +503,7 @@ function CV() {
                                     currentlyHovered
                                 ].description.map((el, i) => {
                                     return (
-                                        <span className="cv-para" key={i}>
+                                        <span className="para" key={i}>
                                             {el}
                                             <br />
                                         </span>
@@ -521,17 +516,15 @@ function CV() {
                             <SlideShow data={reverseCvData[currentlyHovered]} />
                         )}
                     </div>
-                </div>
-                {/* </CSSTransition>
-                </TransitionGroup> */}
-                <div className="cv-div-chart">
-                    <ReactEcharts
-                        option={getEchartOption(
-                            reverseCvData[currentlyHovered]
-                        )}
-                        lazyUpdate={true}
-                        className="world-map"
-                    />
+                    <div className="map-div">
+                        <ReactEcharts
+                            option={getEchartOption(
+                                reverseCvData[currentlyHovered]
+                            )}
+                            lazyUpdate={true}
+                            className="world-map"
+                        />
+                    </div>
                 </div>
             </div>
         </>
