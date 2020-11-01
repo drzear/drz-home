@@ -1,12 +1,10 @@
 .cv-div {
     animation: pageEntrance 700ms ease-out;
 }
-
 .cv-div-timeline {
     width: 33.3%;
     position: absolute;
 }
-
 .year-text {
     font: bold;
     fill: var(--text);
@@ -27,7 +25,6 @@
     margin-right: 3vw;
     margin-bottom: 2vh;
 }
-
 .cv-div-chart {
     position: fixed;
     width: 66.7%;
@@ -38,12 +35,12 @@
     margin-right: 3vw;
     margin-bottom: 2vh;
 }
-
 .cv-div-text > div {
     display: flex;
+    /* align-items: center;
+    justify-content: center; */
     padding-bottom: 2vh;
 }
-
 .time-location {
 }
 .title-company {
@@ -55,6 +52,13 @@
 }
 .logo {
     max-width: 10vw;
+    border-radius: 10%;
+}
+.slideshow {
+    max-width: 50vw;
+    padding-top: 2vh;
+    padding-bottom: 2vh;
+    /* animation */
 }
 .world-map {
     max-height: "500px";
@@ -75,9 +79,6 @@
     .cv-div-chart {
         margin-bottom: 0vh;
     }
-    .world-map {
-        max-height: 150px;
-    }
 }
 @media only screen and (max-height: 650px) {
     .cv-div-text {
@@ -86,4 +87,40 @@
     .cv-div-chart {
         margin-bottom: 0vh;
     }
+    .world-map {
+        max-height: 150px;
+    }
 }
+.image-transition-enter {
+    opacity: 0;
+}
+.image-transition-enter-active {
+    opacity: 1;
+    transition: opacity 500ms ease-in;
+}
+.image-transition-exit {
+    opacity: 1;
+}
+.image-transition-exit-active {
+    opacity: 0;
+    transition: opacity 500ms ease-in;
+}
+.slideshow-div {
+    /* display: block !important; */
+    text-align: center;
+}
+
+/* .cv-div-transition-enter {
+    transform: translateX(-100%);
+}
+.cv-div-transition-enter-active {
+    transform: translateX(0%);
+    transition: transform 500ms;
+}
+.cv-div-transition-exit {
+    transform: translateX(0%);
+}
+.cv-div-transition-exit-active {
+    transform: translateX(100%);
+    transition: transform 500ms;
+} */

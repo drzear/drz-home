@@ -8,6 +8,9 @@ import world from "../../../Images/world_echarts_big.json";
 import Button from "react-bootstrap/Button";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
+import { SwitchTransition, CSSTransition } from "react-transition-group";
+// var ReactCSSTransitionGroup = require("react-transition-group");
+// import * as ReactCSSTransitionGroup from "react-transition-group";
 
 const Line = (props) => {
     const widthMultiplier: number = props.svgWidth / 0.25 <= 700 ? 0.3 : 0.1;
@@ -48,6 +51,44 @@ const Line = (props) => {
             onMouseEnter={props.onMouseEnter}
             style={{ cursor: "pointer" }}
         />
+    );
+};
+
+const SlideShow = (props: { data: cvDataInt }) => {
+    const sampleArray = props.data.slideshow;
+    const [currentImage, setCurrentImage] = useState(0);
+
+    useEffect(() => {
+        let loop = setTimeout(() => {
+            let nextImage: number;
+            if (currentImage + 1 >= sampleArray.length) {
+                nextImage = 0;
+            } else {
+                nextImage = currentImage + 1;
+            }
+            setCurrentImage(nextImage);
+        }, 5000);
+        return () => {
+            window.clearTimeout(loop);
+        };
+    }, [currentImage, sampleArray]);
+
+    return (
+        <SwitchTransition mode="out-in">
+            <CSSTransition
+                key={currentImage}
+                timeout={500}
+                classNames="image-transition"
+            >
+                <img
+                    src={require("../../../Images/SlideShow/" +
+                        sampleArray[currentImage] +
+                        "")}
+                    className="slideshow"
+                    alt=""
+                />
+            </CSSTransition>
+        </SwitchTransition>
     );
 };
 
@@ -203,9 +244,9 @@ function parseData(): any[] {
 
 const renderTooltip = (props) => (
     <Tooltip id="button-tooltip" {...props}>
-        <b>Mobile:</b> Swipe left and right move through the timeline.{" "}
-        <b>Desktop:</b> Left and right arrow on keyboard can navigate the
-        timeline as well as hovering over a time period.
+        <b>Mobile:</b> Swipe left and right to move through the timeline or
+        press on a time period. <b>Desktop:</b> Left and right arrow on keyboard
+        can navigate the timeline as well as hovering over a time period.
     </Tooltip>
 );
 
@@ -349,10 +390,6 @@ function CV() {
                     >
                         {">"}
                     </Button>
-                    {/* <span>yellow = currently highlighted</span>
-                    <span>orange = travel</span>
-                    <span>purple = education</span>
-                    <span>blue = work</span> */}
                     <svg height={svgHeight} width={svgWidth}>
                         <line
                             className="timeline-line"
@@ -406,6 +443,12 @@ function CV() {
                         })}
                     </svg>
                 </div>
+                {/* <TransitionGroup mode="out-in">
+                    <CSSTransition
+                        key={currentlyHovered}
+                        timeout={500}
+                        classNames="cv-div-transition"
+                    > */}
                 <div className="cv-div-text">
                     <div>
                         <div className="time-location">
@@ -415,9 +458,6 @@ function CV() {
                                     "")}
                                 className="logo"
                                 alt=""
-                                style={{
-                                    borderRadius: "10%",
-                                }}
                             />
                         </div>
                         <div className="title-company">
@@ -453,21 +493,37 @@ function CV() {
                         </div>
                     </div>
                     <br />
-                    <div>
-                        <div className="">
-                            {reverseCvData[currentlyHovered].description.map(
-                                (el, i) => {
+                    <div
+                        className={
+                            reverseCvData[currentlyHovered].category ===
+                            "Travel"
+                                ? "slideshow-div"
+                                : ""
+                        }
+                    >
+                        {reverseCvData[currentlyHovered].category !==
+                            "Travel" && (
+                            <div className="">
+                                {reverseCvData[
+                                    currentlyHovered
+                                ].description.map((el, i) => {
                                     return (
                                         <span className="cv-para" key={i}>
                                             {el}
                                             <br />
                                         </span>
                                     );
-                                }
-                            )}
-                        </div>
+                                })}
+                            </div>
+                        )}
+                        {reverseCvData[currentlyHovered].category ===
+                            "Travel" && (
+                            <SlideShow data={reverseCvData[currentlyHovered]} />
+                        )}
                     </div>
                 </div>
+                {/* </CSSTransition>
+                </TransitionGroup> */}
                 <div className="cv-div-chart">
                     <ReactEcharts
                         option={getEchartOption(

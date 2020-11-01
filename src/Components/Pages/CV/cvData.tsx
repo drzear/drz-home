@@ -14,6 +14,7 @@ export interface cvDataInt {
     markedCities: any[]; // { name: "city's name", value: [long, lat, sizeOfMarker] }
     zoom: number; // default should be 1.25
     center: number[]; // default should be 0
+    slideshow: string[];
 }
 
 const date = new Date();
@@ -46,6 +47,7 @@ export const cvData: cvDataInt[] = [
         ],
         zoom: 1.25,
         center: [0, 0],
+        slideshow: [""],
     },
     {
         startYYYYMM: 201801,
@@ -73,6 +75,7 @@ export const cvData: cvDataInt[] = [
         ],
         zoom: 1.25,
         center: [0, 0],
+        slideshow: [""],
     },
     {
         startYYYYMM: 201705,
@@ -100,6 +103,7 @@ export const cvData: cvDataInt[] = [
         ],
         zoom: 1.25,
         center: [0, 0],
+        slideshow: [""],
     },
     {
         startYYYYMM: 201507,
@@ -125,6 +129,7 @@ export const cvData: cvDataInt[] = [
         ],
         zoom: 1.25,
         center: [0, 0],
+        slideshow: [""],
     },
     {
         startYYYYMM: 201412,
@@ -134,7 +139,7 @@ export const cvData: cvDataInt[] = [
         location: "Gronau-Epe, DE",
         city: "Epe",
         country: ["Germany"],
-        title: "",
+        title: "Temporary Resident",
         category: "Travel",
         company: "N/A",
         description: [""],
@@ -147,6 +152,7 @@ export const cvData: cvDataInt[] = [
         ],
         zoom: 1.25,
         center: [0, 0],
+        slideshow: ["g1.jpg", "g3.jpg", "g4.jpg", "g5.jpg", "g6.jpg"],
     },
     {
         startYYYYMM: 201410,
@@ -175,6 +181,17 @@ export const cvData: cvDataInt[] = [
         ],
         zoom: 9,
         center: [100, 12],
+        slideshow: [
+            "t7.jpg",
+            "t1.JPG",
+            "t2.JPG",
+            "t3.JPG",
+            "t4.JPG",
+            "t5.JPG",
+            "t6.JPG",
+            "t8.JPG",
+            "t9.JPG",
+        ],
     },
     {
         startYYYYMM: 201409,
@@ -197,6 +214,7 @@ export const cvData: cvDataInt[] = [
         ],
         zoom: 13,
         center: [85.324, 27.7172],
+        slideshow: ["n1.JPG", "n2.JPG", "n3.JPG", "n4.JPG", "n5.JPG", "n6.JPG"],
     },
     {
         startYYYYMM: 201408,
@@ -223,6 +241,7 @@ export const cvData: cvDataInt[] = [
         ],
         zoom: 5,
         center: [133.7751, -25.2744],
+        slideshow: ["a1.JPG", "a5.JPG", "a6.JPG", "a7.JPG", "a8.JPG", "a9.JPG"],
     },
     {
         startYYYYMM: 201407,
@@ -268,6 +287,16 @@ export const cvData: cvDataInt[] = [
         ],
         zoom: 13,
         center: [174.886, -40.9006],
+        slideshow: [
+            "nz1.JPG",
+            "nz2.JPG",
+            "nz3.JPG",
+            "nz5.JPG",
+            "nz6.JPG",
+            "nz7.JPG",
+            "nz8.JPG",
+            "nz9.JPG",
+        ],
     },
     {
         startYYYYMM: 201007,
@@ -294,6 +323,7 @@ export const cvData: cvDataInt[] = [
         ],
         zoom: 1.25,
         center: [0, 0],
+        slideshow: [""],
     },
     {
         startYYYYMM: 200806,
@@ -319,6 +349,7 @@ export const cvData: cvDataInt[] = [
         ],
         zoom: 1.25,
         center: [0, 0],
+        slideshow: [""],
     },
     {
         startYYYYMM: 200308,
@@ -349,6 +380,7 @@ export const cvData: cvDataInt[] = [
         ],
         zoom: 1.25,
         center: [0, 0],
+        slideshow: [""],
     },
 ];
 
