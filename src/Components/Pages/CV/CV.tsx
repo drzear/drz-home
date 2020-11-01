@@ -55,13 +55,13 @@ const Line = (props) => {
 };
 
 const SlideShow = (props: { data: cvDataInt }) => {
-    const sampleArray = props.data.slideshow;
+    const imageArray = props.data.slideshow;
     const [currentImage, setCurrentImage] = useState(0);
 
     useEffect(() => {
         let loop = setTimeout(() => {
             let nextImage: number;
-            if (currentImage + 1 >= sampleArray.length) {
+            if (currentImage + 1 >= imageArray.length) {
                 nextImage = 0;
             } else {
                 nextImage = currentImage + 1;
@@ -71,7 +71,7 @@ const SlideShow = (props: { data: cvDataInt }) => {
         return () => {
             window.clearTimeout(loop);
         };
-    }, [currentImage, sampleArray]);
+    }, [currentImage, imageArray]);
 
     return (
         <SwitchTransition mode="out-in">
@@ -82,7 +82,10 @@ const SlideShow = (props: { data: cvDataInt }) => {
             >
                 <img
                     src={require("../../../Images/SlideShow/" +
-                        sampleArray[currentImage] +
+                        (imageArray[currentImage] &&
+                        imageArray[currentImage] !== ""
+                            ? imageArray[currentImage]
+                            : imageArray[0]) +
                         "")}
                     className="slideshow-image"
                     alt=""
