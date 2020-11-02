@@ -58,6 +58,7 @@ class Home extends React.Component<HomeProps, HomeState> {
                         onClick={() => this.handleOnClick("/cv")}
                     >
                         <span className="cardText">Interactive CV</span>
+                        <span className="cardText">+ Timeline</span>
                     </div>
                     <div
                         className={
@@ -71,6 +72,10 @@ class Home extends React.Component<HomeProps, HomeState> {
                         onClick={() => this.handleOnClick("/biSamples")}
                     >
                         <span className="cardText">BI Samples</span>
+                        <br />
+                        <span className="cardText">
+                            <b>coming soon!</b>
+                        </span>
                     </div>
                     <div
                         className={
