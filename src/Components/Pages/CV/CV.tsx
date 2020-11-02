@@ -367,7 +367,7 @@ function CV() {
                             overlay={renderTooltip}
                         >
                             <Button
-                                variant="outline-primary"
+                                variant="info"
                                 style={{
                                     flex: 1,
                                     marginTop: "1vh",
@@ -379,7 +379,7 @@ function CV() {
                         </OverlayTrigger>
                         <Button
                             onClick={handleNextClick}
-                            variant="outline-danger"
+                            variant="secondary"
                             style={{
                                 flex: 3,
                                 marginTop: "1vh",
@@ -390,7 +390,7 @@ function CV() {
                         </Button>
                         <Button
                             onClick={handleBackClick}
-                            variant="outline-success"
+                            variant="primary"
                             style={{
                                 flex: 3,
                                 // width: 0.4 * svgWidth,
