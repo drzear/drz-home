@@ -5,12 +5,8 @@ import { cvData, colorArrays, cvDataInt } from "./cvData";
 import ReactEcharts from "echarts-for-react";
 import echarts from "echarts";
 import world from "../../../Images/world_echarts_big.json";
-import Button from "react-bootstrap/Button";
-import OverlayTrigger from "react-bootstrap/OverlayTrigger";
-import Tooltip from "react-bootstrap/Tooltip";
+import { Button, OverlayTrigger, Row, Tooltip } from "react-bootstrap";
 import { SwitchTransition, CSSTransition } from "react-transition-group";
-// var ReactCSSTransitionGroup = require("react-transition-group");
-// import * as ReactCSSTransitionGroup from "react-transition-group";
 
 const Line = (props) => {
     const widthMultiplier: number = props.svgWidth / 0.25 <= 700 ? 0.3 : 0.1;
@@ -255,7 +251,13 @@ const renderTooltip = (props) => (
 
 function CV() {
     // window resizing
-    const [width, setWidth] = useState(window.innerWidth);
+    const [svgWidth, setSvgWidth] = useState(
+        window.innerWidth >= 1600
+            ? window.innerWidth * 0.15
+            : window.innerWidth >= 900
+            ? window.innerWidth * 0.2
+            : window.innerWidth * 0.3
+    );
     const [height, setHeight] = useState(window.innerHeight);
     // handle swipe
     const [initialClientX, setInitialClientX] = useState(0);
@@ -265,7 +267,13 @@ function CV() {
     const [currentlyHovered, setCurrentlyHovered] = useState(cvData.length - 1);
     useEffect(() => {
         const handleResize = () => {
-            setWidth(window.innerWidth);
+            setSvgWidth(
+                window.innerWidth >= 1600
+                    ? window.innerWidth * 0.15
+                    : window.innerWidth >= 900
+                    ? window.innerWidth * 0.2
+                    : window.innerWidth * 0.3
+            );
             setHeight(window.innerHeight);
         };
         // next and back on timeline buttons
@@ -342,7 +350,6 @@ function CV() {
     };
     const yearMarkers: { year: number; position: number }[] = parseData();
     const svgHeight = 2 * height;
-    const svgWidth = 0.25 * width;
     const reverseCvData = [...cvData].reverse();
     return (
         <>
@@ -353,47 +360,47 @@ function CV() {
                 onTouchEnd={handleTouchEnd}
             >
                 <div className="timeline-div">
-                    <OverlayTrigger
-                        placement="right"
-                        delay={{ show: 250, hide: 400 }}
-                        overlay={renderTooltip}
-                    >
+                    <Row className="mx-0">
+                        <OverlayTrigger
+                            placement="right"
+                            delay={{ show: 250, hide: 400 }}
+                            overlay={renderTooltip}
+                        >
+                            <Button
+                                variant="outline-primary"
+                                style={{
+                                    flex: 1,
+                                    marginTop: "1vh",
+                                    marginBottom: "1vh",
+                                }}
+                            >
+                                <i>i</i>
+                            </Button>
+                        </OverlayTrigger>
                         <Button
+                            onClick={handleNextClick}
+                            variant="outline-danger"
                             style={{
-                                width: 0.1 * svgWidth,
+                                flex: 3,
                                 marginTop: "1vh",
                                 marginBottom: "1vh",
-                                marginRight: 0.01 * svgWidth,
-                                marginLeft: 0.01 * svgWidth,
                             }}
                         >
-                            <i>i</i>
+                            {"<"}
                         </Button>
-                    </OverlayTrigger>
-                    <Button
-                        onClick={handleNextClick}
-                        variant="secondary"
-                        style={{
-                            width: 0.44 * svgWidth,
-                            marginTop: "1vh",
-                            marginBottom: "1vh",
-                            marginRight: 0.01 * svgWidth,
-                        }}
-                    >
-                        {"<"}
-                    </Button>
-                    <Button
-                        onClick={handleBackClick}
-                        variant="secondary"
-                        style={{
-                            width: 0.44 * svgWidth,
-                            marginTop: "1vh",
-                            marginBottom: "1vh",
-                            marginLeft: 0.01 * svgWidth,
-                        }}
-                    >
-                        {">"}
-                    </Button>
+                        <Button
+                            onClick={handleBackClick}
+                            variant="outline-success"
+                            style={{
+                                flex: 3,
+                                // width: 0.4 * svgWidth,
+                                marginTop: "1vh",
+                                marginBottom: "1vh",
+                            }}
+                        >
+                            {">"}
+                        </Button>
+                    </Row>
                     <svg height={svgHeight} width={svgWidth}>
                         <line
                             className="timeline-line"

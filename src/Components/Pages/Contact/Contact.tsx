@@ -1,13 +1,16 @@
 import React from "react";
+import { Container, Row } from "react-bootstrap";
 import "./Contact.css";
 
-class Contact extends React.Component {
-    render() {
-        return (
-            <>
-                <div>Contact</div>
-            </>
-        );
-    }
+function Contact() {
+    return (
+        <>
+            <Container className="contact-container">
+                <Row>Linkedin</Row>
+                <Row>Github</Row>
+            </Container>
+        </>
+    );
 }
+
 export default Contact;

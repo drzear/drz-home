@@ -1,11 +1,12 @@
 import React from "react";
+import { Container } from "react-bootstrap";
 import "./About.css";
 
 class About extends React.Component {
     render() {
         return (
             <>
-                <div className="about-div">
+                <Container className="about-div">
                     {/* <h1>About</h1> */}
                     <p className="about-para">
                         <br />
@@ -75,7 +76,7 @@ class About extends React.Component {
                         games, and learn new things (right now I'm learning
                         react.js).
                     </p>
-                </div>
+                </Container>
             </>
         );
     }

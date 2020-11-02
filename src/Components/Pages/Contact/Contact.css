@@ -1,0 +1,4 @@
+.contact-container {
+    animation: pageEntrance 700ms ease-out;
+    color: var(--text);
+}

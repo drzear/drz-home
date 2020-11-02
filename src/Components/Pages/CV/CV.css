@@ -1,9 +1,10 @@
 .cv-container {
     animation: pageEntrance 700ms ease-out;
+    margin-top: 1vh;
 }
 .timeline-div {
     /* background: red; */
-    width: 33.3%;
+    width: 30vw;
     position: absolute;
 }
 .timeline-year-text {
@@ -15,16 +16,15 @@
 }
 .info-div {
     position: fixed;
-    width: 66.7%;
+    width: 70vw;
     height: 100%;
     right: 0;
-    margin-top: 1vh;
     /* background: gray; */
 }
 .map-div {
     position: fixed;
     height: 25%;
-    width: 66.7%;
+    width: 70vw;
     right: 0;
     bottom: 0;
     /* background: yellow; */
@@ -37,6 +37,8 @@
 .text-div {
     display: flex;
     padding-bottom: 2vh;
+    padding-left: 2vw;
+    padding-right: 1vw;
 }
 .top-3-div {
     width: 33.3%;
@@ -50,6 +52,7 @@
 }
 .logo-div {
     max-height: 12vh;
+    text-align: center;
 }
 .logo {
     max-width: 100%;
@@ -104,4 +107,32 @@
 .slideshow-transition-exit-active {
     opacity: 0;
     transition: opacity 500ms ease-in;
+}
+@media only screen and (min-width: 900px) {
+    .timeline-div {
+        left: 10vw;
+        width: 20vw;
+    }
+    .info-div {
+        right: 10vw;
+        width: 60vw;
+    }
+    .map-div {
+        right: 10vw;
+        width: 60vw;
+    }
+}
+@media only screen and (min-width: 1600px) {
+    .timeline-div {
+        left: 20vw;
+        width: 15vw;
+    }
+    .info-div {
+        right: 20vw;
+        width: 45vw;
+    }
+    .map-div {
+        right: 20vw;
+        width: 45vw;
+    }
 }
