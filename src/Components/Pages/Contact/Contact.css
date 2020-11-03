@@ -2,3 +2,29 @@
     animation: pageEntrance 700ms ease-out;
     color: var(--text);
 }
+.contact-logo {
+    border-radius: 5%;
+    width: 10vw;
+    height: auto;
+}
+.contact-logo-linkedin {
+    border-radius: 10%;
+    width: 10vw;
+    height: auto;
+}
+@media only screen and (max-height: 700) {
+    .contact-logo {
+        width: 20vw;
+    }
+    .contact-logo-linkedin {
+        width: 20vw;
+    }
+}
+@media only screen and (max-height: 1100px) {
+    .contact-logo {
+        width: 15vw;
+    }
+    .contact-logo-linkedin {
+        width: 15vw;
+    }
+}
