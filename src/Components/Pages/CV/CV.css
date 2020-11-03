@@ -3,7 +3,6 @@
     margin-top: 1vh;
 }
 .timeline-div {
-    /* background: red; */
     width: 30vw;
     position: absolute;
 }
@@ -19,7 +18,6 @@
     width: 70vw;
     height: 100%;
     right: 0;
-    /* background: gray; */
 }
 .map-div {
     position: fixed;
@@ -27,7 +25,6 @@
     width: 70vw;
     right: 0;
     bottom: 0;
-    /* background: yellow; */
 }
 .world-map {
     max-height: "500px";
@@ -69,13 +66,13 @@
 }
 @media only screen and (max-height: 900px) {
     .info-div {
-        font-size: small;
+        font-size: medium;
     }
     .map-div {
         margin-bottom: 0vh;
     }
 }
-@media only screen and (max-height: 700px) {
+@media only screen and (max-height: 700px) and (max-width: 450px) {
     .info-div {
         font-size: x-small;
     }
@@ -83,15 +80,20 @@
         margin-bottom: 0vh;
     }
 }
-@media only screen and (max-height: 650px) {
+@media only screen and (max-height: 600px) and (min-width: 1200px) {
     .info-div {
-        font-size: xx-small;
+        font-size: small;
     }
     .map-div {
         margin-bottom: 0vh;
     }
-    .world-map {
-        max-height: 150px;
+}
+@media only screen and (min-height: 720px) and (max-width: 550px) {
+    .info-div {
+        font-size: small;
+    }
+    .map-div {
+        margin-bottom: 0vh;
     }
 }
 .slideshow-transition-enter {

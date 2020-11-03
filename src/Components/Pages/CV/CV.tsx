@@ -497,7 +497,6 @@ function CV() {
                             </span>
                         </div>
                     </div>
-                    <br />
                     <div
                         className={
                             reverseCvData[currentlyHovered].category ===

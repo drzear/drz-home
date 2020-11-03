@@ -1,6 +1,5 @@
 import React from "react";
 import "./Header.css";
-import logo from "../../../logo.svg";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import { withRouter } from "react-router-dom";
@@ -117,17 +116,6 @@ class Header extends React.Component<HeaderProps, HeaderState> {
                             >
                                 Contact
                             </Nav.Link>
-                            {/* <Nav.Link
-                                className={
-                                    "navlink" +
-                                    (this.state.activeLink === "/biSamples"
-                                        ? " active-navlink"
-                                        : "")
-                                }
-                                onClick={() => this.handleOnClick("/biSamples")}
-                            >
-                                BI Samples
-                            </Nav.Link> */}
                         </Nav>
                         <ThemeSwitch
                             onClick={() => this.handleThemeOnClick()}
