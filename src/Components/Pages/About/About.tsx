@@ -7,9 +7,8 @@ class About extends React.Component {
         return (
             <>
                 <Container className="about-div">
-                    {/* <h1>About</h1> */}
+                    <h3 className="about-h">About Me</h3>
                     <p className="about-para">
-                        <br />
                         Hi, my name is David{" "}
                         <span role="img" aria-label="wave">
                             👋
@@ -73,8 +72,50 @@ class About extends React.Component {
                         >
                             video
                         </a>{" "}
-                        games, and learn new things (right now I'm learning
-                        react.js).
+                        games, and learn new things.
+                    </p>
+                    <h3 className="about-h">About This Site</h3>
+                    <p className="about-para">
+                        This site was made using{" "}
+                        <a
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            href="https://reactjs.org/"
+                            title="React"
+                        >
+                            React.js
+                        </a>{" "}
+                        (this is my first React project!),{" "}
+                        <a
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            href="https://www.typescriptlang.org/"
+                            title="Typescript"
+                        >
+                            Typescript
+                        </a>{" "}
+                        (gotta love static typing), and{" "}
+                        <a
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            href="https://echarts.apache.org/en/index.html"
+                            title="Echarts"
+                        >
+                            Echarts
+                        </a>
+                        .
+                        <br />
+                        {/* <br /> */}
+                        You can find the source code{" "}
+                        <a
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            href="https://github.com/drzear/drz-home"
+                            title="drz-home github repo"
+                        >
+                            here
+                        </a>
+                        .
                     </p>
                 </Container>
             </>

@@ -1,8 +1,9 @@
 .about-para {
     color: var(--text);
-    margin-left: 3vw;
-    margin-right: 3vw;
-    max-width: 1500px;
+}
+.about-h {
+    color: var(--text);
+    padding-top: 1vh;
 }
 @keyframes pageEntrance {
     from {
