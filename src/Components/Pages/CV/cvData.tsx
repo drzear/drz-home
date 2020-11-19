@@ -36,7 +36,8 @@ export const cvData: cvDataInt[] = [
             "• Create business intelligence dashboards using Angular (typescript/HTML/CSS).",
             "• Model data in and maintain MySQL and Clickhouse databases.",
             "• Create new data pipelines from source to dashboard (e.g. source db -> RHG database -> model data -> deliver to front-end).",
-            "• Work from Stockholm as part of a remote geographically distributed team that is based in Brussels.",
+            "• Work from Stockholm as part of a remote geographically-distributed team that is based in Brussels.",
+            "• Collaborate with many levels and departments within organization.",
         ],
         image: "rhg.png",
         markedCities: [
