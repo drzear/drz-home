@@ -69,13 +69,9 @@ class Home extends React.Component<HomeProps, HomeState> {
                             backgroundImage: `url(${require("../../../Images/kaikoura.JPG")})`,
                             backgroundPosition: "center",
                         }}
-                        onClick={() => this.handleOnClick("/biSamples")}
+                        onClick={() => this.handleOnClick("/dashboards")}
                     >
-                        <span className="cardText">BI Samples</span>
-                        <br />
-                        <span className="cardText">
-                            <b>coming soon!</b>
-                        </span>
+                        <span className="cardText">Dashboards</span>
                     </div>
                     <div
                         className={

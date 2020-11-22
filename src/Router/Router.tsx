@@ -7,7 +7,33 @@ import CV from "../Components/Pages/CV/CV";
 import { BrowserRouter, Route, Redirect, Switch } from "react-router-dom";
 import Header from "../Components/Pieces/Header/Header";
 
-class MyRouter extends React.Component {
+interface Props {
+    onThemeClick: Function;
+}
+
+interface State {
+    theme: string;
+}
+
+class MyRouter extends React.Component<Props, State> {
+    constructor(props) {
+        super(props);
+        let themeForState: string;
+        const existingTheme = localStorage.getItem("themeState");
+        if (existingTheme) {
+            themeForState = existingTheme;
+        } else {
+            themeForState = "dark";
+        }
+        this.state = {
+            theme: themeForState,
+        };
+    }
+    handleThemeClick = (themeInput: string) => {
+        this.setState({
+            theme: themeInput,
+        });
+    };
     render() {
         return (
             <>
@@ -16,18 +42,46 @@ class MyRouter extends React.Component {
                         <Route
                             exact
                             path="/about"
-                            component={DefaultContainer}
+                            render={(props) => (
+                                <DefaultContainer
+                                    {...props}
+                                    onThemeSwitch={this.handleThemeClick}
+                                    theme={this.state.theme}
+                                />
+                            )}
                         />
                         <Route
                             exact
-                            path="/biSamples"
-                            component={DefaultContainer}
+                            path="/dashboards"
+                            render={(props) => (
+                                <DefaultContainer
+                                    {...props}
+                                    onThemeSwitch={this.handleThemeClick}
+                                    theme={this.state.theme}
+                                />
+                            )}
                         />
-                        <Route exact path="/cv" component={DefaultContainer} />
+                        <Route
+                            exact
+                            path="/cv"
+                            render={(props) => (
+                                <DefaultContainer
+                                    {...props}
+                                    onThemeSwitch={this.handleThemeClick}
+                                    theme={this.state.theme}
+                                />
+                            )}
+                        />
                         <Route
                             exact
                             path="/contact"
-                            component={DefaultContainer}
+                            render={(props) => (
+                                <DefaultContainer
+                                    {...props}
+                                    onThemeSwitch={this.handleThemeClick}
+                                    theme={this.state.theme}
+                                />
+                            )}
                         />
                         <Route exact path="/home" component={HomeContainer} />
                         <Route exact path="/" component={HomeContainer} />
@@ -48,11 +102,17 @@ const HomeContainer = () => (
     </>
 );
 
-const DefaultContainer = () => (
+const DefaultContainer = (props) => (
     <>
-        <Header />
+        <Header onThemeSwitch={props.onThemeSwitch} />
         <Route exact path="/about" component={About} />
-        <Route exact path="/biSamples" component={BiSamples} />
+        <Route
+            exact
+            path="/dashboards"
+            render={(routerProps) => (
+                <BiSamples {...routerProps} theme={props.theme} />
+            )}
+        />
         <Route exact path="/cv" component={CV} />
         <Route exact path="/contact" component={Contact} />
     </>

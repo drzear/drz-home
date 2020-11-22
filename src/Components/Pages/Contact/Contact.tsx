@@ -58,7 +58,7 @@ function Contact() {
                         </a>
                     </Media>
                 </Row>
-                <Row className="justify-content-center">
+                <Row className="justify-content-center cv-as-pdf-div">
                     <a href={CV} target="_blank" rel="noopener noreferrer">
                         <p className="cv-as-pdf">CV as PDF</p>
                     </a>

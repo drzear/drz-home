@@ -31,6 +31,7 @@
 
 .navlink {
     color: var(--text-nav) !important;
+    cursor: pointer;
 }
 
 .navlink:hover {

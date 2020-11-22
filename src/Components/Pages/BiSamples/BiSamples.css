@@ -3,15 +3,8 @@
     color: var(--text);
     margin-top: 1vh;
 }
-
-.covid-world-map {
-    max-height: "500px";
-    width: 100%;
-    height: 100% !important;
-}
-.covid-usa-timeline {
-    /* height: "1000px"; */
-
-    width: 100%;
-    height: 100% !important;
+.dashboard-btn-label {
+    color: var(--text) !important;
+    cursor: default;
+    pointer-events: none;
 }

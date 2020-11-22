@@ -15,13 +15,18 @@
     margin-top: 1vh;
 }
 .cv-as-pdf {
-    background-color: darkorange;
+    background-color: var(--text);
     border-radius: 55%;
-    color: white;
+    color: var(--bg-dropdown);
     font-size: 3vw;
-    margin-top: 3vh;
     padding-left: 1vw;
     padding-right: 1vw;
+    height: 8vh;
+    display: table-cell;
+    vertical-align: middle;
+}
+.cv-as-pdf-div {
+    margin-top: 1vh;
 }
 @media only screen and (max-height: 700) {
     .contact-logo {

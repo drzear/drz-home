@@ -7,11 +7,13 @@ import ThemeSwitch from "../ThemeSwitch/ThemeSwitch";
 
 interface HeaderProps {
     history: any;
+    onThemeSwitch?: Function;
 }
 
 interface HeaderState {
     activeLink: string;
     lightTheme: boolean;
+    theme: string;
 }
 
 class Header extends React.Component<HeaderProps, HeaderState> {
@@ -28,6 +30,7 @@ class Header extends React.Component<HeaderProps, HeaderState> {
         this.state = {
             activeLink: this.props.history.location.pathname,
             lightTheme: themeIsLight,
+            theme: themeIsLight ? "light" : "dark",
         };
     }
     componentDidMount() {
@@ -50,34 +53,29 @@ class Header extends React.Component<HeaderProps, HeaderState> {
             return {
                 activeLink: state.activeLink,
                 lightTheme: themeIsLight,
+                theme: themeIsLight ? "light" : "dark",
             };
         });
+        if (this.props.onThemeSwitch) {
+            this.props.onThemeSwitch(themeIsLight ? "light" : "dark");
+        }
     };
     render() {
         return (
             <>
                 <Navbar
                     collapseOnSelect
-                    // variant={this.state.lightTheme ? undefined : "dark"}
                     variant="dark"
                     expand="md"
                     className="navbar"
-                    // fixed="top"
                 >
-                    <Navbar.Brand href="/" className="navlink">
-                        {/* <img
-                            alt="logo"
-                            src={logo}
-                            width="30"
-                            height="30"
-                            className="d-inline-block align-top Spinning-logo"
-                        />{" "} */}
+                    <Navbar.Brand
+                        onClick={() => this.handleOnClick("/")}
+                        className="navlink"
+                    >
                         David Ryne Zear
                     </Navbar.Brand>
-                    <Navbar.Toggle
-                        aria-controls="responsive-navbar-nav"
-                        // className="navbar-collapse"
-                    />
+                    <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                     <Navbar.Collapse
                         id="responsive-navbar-nav"
                         className="navbar-collapse"
@@ -104,6 +102,19 @@ class Header extends React.Component<HeaderProps, HeaderState> {
                                 onClick={() => this.handleOnClick("/cv")}
                             >
                                 Interactive CV
+                            </Nav.Link>
+                            <Nav.Link
+                                className={
+                                    "navlink" +
+                                    (this.state.activeLink === "/dashboards"
+                                        ? " active-navlink"
+                                        : "")
+                                }
+                                onClick={() =>
+                                    this.handleOnClick("/dashboards")
+                                }
+                            >
+                                Dashboards
                             </Nav.Link>
                             <Nav.Link
                                 className={

@@ -78,8 +78,6 @@
 .card:nth-child(3) {
     grid-area: c;
     animation-delay: calc(3 * var(--stagger-delay));
-    cursor: default;
-    pointer-events: none;
 }
 .card:nth-child(4) {
     grid-area: d;

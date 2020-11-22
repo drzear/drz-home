@@ -1,0 +1,9 @@
+.covid-usa-map {
+    max-height: "500px";
+    width: 100%;
+    height: 100% !important;
+}
+.covid-usa-timeline {
+    width: 100%;
+    height: 100% !important;
+}
