@@ -52,8 +52,8 @@ class Home extends React.Component<HomeProps, HomeState> {
                             (this.state.loaded ? " animate-after-load" : "")
                         }
                         style={{
-                            backgroundImage: `url(${require("../../../Images/vanHills.JPG")})`,
-                            backgroundPosition: "right top",
+                            backgroundImage: `url(${require("../../../Images/hills.JPG")})`,
+                            backgroundPosition: "center top",
                         }}
                         onClick={() => this.handleOnClick("/cv")}
                     >
@@ -79,8 +79,8 @@ class Home extends React.Component<HomeProps, HomeState> {
                             (this.state.loaded ? " animate-after-load" : "")
                         }
                         style={{
-                            backgroundImage: `url(${require("../../../Images/bineBondi.JPG")})`,
-                            backgroundPosition: "center top",
+                            backgroundImage: `url(${require("../../../Images/cloudSmile.JPG")})`,
+                            backgroundPosition: "center",
                         }}
                         onClick={() => this.handleOnClick("/contact")}
                     >

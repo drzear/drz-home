@@ -6,37 +6,90 @@ import "./USACovidDashboard.css";
 import usaCovidData from "../weekly-usa-covid.json";
 import { usaDiseases } from "../biData";
 import usa from "../../../../Images/USA.json";
-import usaStates from "../../../../Images/us_state_pops_2019.json";
+import usaStates from "../us_state_pops_2019.json";
 
-const getUSAMapEchartOption = () => {
-    // maybe change this to deaths % change vs 2019? or % of total
-    // either way prob just 1 year
-    let dataArray: any[] = [];
+const getUSAMapEchartOption = (theme: string) => {
+    // calculate deaths per million per state
+    // sometimes the value is a number and sometimes a string so have to clean the numbers before adding
+    let dataArray: { name: string; value: number }[] = [];
     usaCovidData.forEach((row) => {
         const state = row["Jurisdiction of Occurrence"];
-        let val = 0;
-        if (row["All Cause"] && typeof row["All Cause"] === "string") {
-            val = parseFloat(row["All Cause"].replace(/,/g, ""));
-        } else if (row["All Cause"] && typeof row["All Cause"] === "number") {
-            val = row["All Cause"];
+        // multiple value
+        let val0 = 0;
+        if (
+            row["COVID-19 (U071, Multiple Cause of Death)"] &&
+            // eslint-disable-next-line eqeqeq
+            row["MMWR Year"] == 2020 &&
+            typeof row["COVID-19 (U071, Multiple Cause of Death)"] === "string"
+        ) {
+            val0 = parseFloat(
+                row["COVID-19 (U071, Multiple Cause of Death)"].replace(
+                    /,/g,
+                    ""
+                )
+            );
+        } else if (
+            row["COVID-19 (U071, Multiple Cause of Death)"] &&
+            // eslint-disable-next-line eqeqeq
+            row["MMWR Year"] == 2020 &&
+            typeof row["COVID-19 (U071, Multiple Cause of Death)"] === "number"
+        ) {
+            val0 = row["COVID-19 (U071, Multiple Cause of Death)"];
         }
+        // underlying value NOT NEEDED, APPEARS TO BE FOLDED INTO MULTIPLE CAUSE ABOVE
+        // let val1 = 0;
+        // if (
+        //     row["COVID-19 (U071, Underlying Cause of Death)"] &&
+        //     // eslint-disable-next-line eqeqeq
+        //     row["MMWR Year"] == 2020 &&
+        //     typeof row["COVID-19 (U071, Underlying Cause of Death)"] ===
+        //         "string"
+        // ) {
+        //     val1 = parseFloat(
+        //         row["COVID-19 (U071, Underlying Cause of Death)"].replace(
+        //             /,/g,
+        //             ""
+        //         )
+        //     );
+        // } else if (
+        //     row["COVID-19 (U071, Underlying Cause of Death)"] &&
+        //     // eslint-disable-next-line eqeqeq
+        //     row["MMWR Year"] == 2020 &&
+        //     typeof row["COVID-19 (U071, Underlying Cause of Death)"] ===
+        //         "number"
+        // ) {
+        //     val1 = row["COVID-19 (U071, Underlying Cause of Death)"];
+        // }
         if (dataArray.findIndex((el) => state === el["name"]) === -1) {
-            dataArray.push({ name: state, value: val });
+            dataArray.push({ name: state, value: val0 });
         } else {
             const idx = dataArray.findIndex((el) => state === el["name"]);
-            dataArray[idx]["value"] += val;
+            dataArray[idx]["value"] += val0;
         }
+    });
+    // turn raw deaths into per 100,000
+    dataArray.forEach((el) => {
+        const statePop = usaStates.find((state) => state.State === el.name);
+        el.value =
+            (el.value / (statePop?.Population ? statePop?.Population : 1)) *
+            100000;
     });
     let max = 0;
     dataArray.forEach((el) => {
-        if (el["name"] !== "United States" && el["value"] > max) {
+        if (
+            usaStates.find((state) => state.State === el["name"]) &&
+            el["value"] > max
+        ) {
             max = el["value"];
         }
     });
     return {
         title: {
-            text: "USA Deaths",
-            subtext: "Data from the US CDC",
+            text: "USA Covid-Related Deaths per 100,000",
+            textStyle: {
+                color: theme === "light" ? "black" : "white",
+            },
+            subtext: "Data from the US CDC as of 2020-11-08",
             sublink:
                 "https://data.cdc.gov/NCHS/Weekly-Counts-of-Deaths-by-State-and-Select-Causes/muzy-jte6",
             left: "left",
@@ -59,22 +112,12 @@ const getUSAMapEchartOption = () => {
             min: 0,
             max: max,
             inRange: {
-                color: [
-                    "#313695",
-                    "#4575b4",
-                    "#74add1",
-                    "#abd9e9",
-                    "#e0f3f8",
-                    "#ffffbf",
-                    "#fee090",
-                    "#fdae61",
-                    "#f46d43",
-                    "#d73027",
-                    "#a50026",
-                ],
+                color: ["aqua", "darkblue"],
             },
-            // text: ["High", "Low"],
             calculable: true,
+            textStyle: {
+                color: theme === "light" ? "black" : "white",
+            },
         },
         series: [
             {
@@ -84,7 +127,10 @@ const getUSAMapEchartOption = () => {
                 map: "USA",
                 emphasis: {
                     label: {
-                        show: true,
+                        show: false,
+                    },
+                    itemStyle: {
+                        areaColor: "white",
                     },
                 },
                 textFixed: {
@@ -97,6 +143,7 @@ const getUSAMapEchartOption = () => {
 };
 
 const getUSALineEchartOption = (selectedStates: string[], theme: string) => {
+    // get array of {week, cause1, cause2, ...}
     let dataArray: any[] = [];
     usaCovidData.forEach((row) => {
         const state = row["Jurisdiction of Occurrence"];
@@ -128,13 +175,40 @@ const getUSALineEchartOption = (selectedStates: string[], theme: string) => {
             });
         }
     });
-    let finalArray: { name: string; type: string; data: number[] }[] = [];
+    // get population for all selected states
+    let population = 0;
+    if (selectedStates[0] === "United States") {
+        usaStates.forEach((state) => (population += state.Population));
+    } else {
+        usaStates.forEach((state) => {
+            if (
+                selectedStates.find(
+                    (selectedState) => selectedState === state.State
+                )
+            ) {
+                population += state.Population;
+            }
+        });
+    }
+    let finalArray: {
+        name: string;
+        type: string;
+        data: number[];
+        animationEasing: string;
+        animationDuration: number;
+    }[] = [];
     dataArray.forEach((row, i) => {
         // first create series entry for each disease
         if (i === 1) {
             Object.keys(row).forEach((key) => {
                 if (key !== "week") {
-                    finalArray.push({ name: key, type: "line", data: [] });
+                    finalArray.push({
+                        name: key,
+                        type: "line",
+                        data: [],
+                        animationEasing: "linear",
+                        animationDuration: 1000,
+                    });
                 }
             });
         }
@@ -142,14 +216,19 @@ const getUSALineEchartOption = (selectedStates: string[], theme: string) => {
             const idx = finalArray.findIndex((el) => el["name"] === key);
             // only if index is found (to avoid "week")
             if (idx !== -1) {
-                finalArray[idx]["data"].push(row[key]);
+                finalArray[idx]["data"].push(
+                    +((row[key] * 100000) / population).toFixed(1)
+                );
             }
         });
     });
 
     return {
         title: {
-            text: "",
+            text: "Causes of Death (per 100,000)",
+            textStyle: {
+                color: theme === "light" ? "black" : "white",
+            },
         },
         tooltip: {
             trigger: "axis",
@@ -197,12 +276,14 @@ const getUSALineEchartOption = (selectedStates: string[], theme: string) => {
             },
         ],
         series: finalArray,
+        animation: true,
     };
 };
 
 function USACovidDashboard(props) {
     const [selectionStates, setSelectionStates] = useState(["United States"]);
     const [showStates, setShowStates] = useState(false);
+    // const [btnOutline, setBtnOutline] = useState('outline-');
 
     useEffect(() => {
         echarts.registerMap("USA", usa, {
@@ -210,6 +291,7 @@ function USACovidDashboard(props) {
                 left: -131,
                 top: 25,
                 width: 15,
+                height: 7,
             },
             Hawaii: {
                 left: -110,
@@ -277,6 +359,7 @@ function USACovidDashboard(props) {
     const onMapEvents = {
         click: onMapClick,
     };
+    const btnOutline = props.theme !== "light" ? "outline-" : "";
 
     return (
         <>
@@ -284,7 +367,7 @@ function USACovidDashboard(props) {
                 <Col>
                     <div className="">
                         <ReactEcharts
-                            option={getUSAMapEchartOption()}
+                            option={getUSAMapEchartOption(props.theme)}
                             lazyUpdate={true}
                             className="covid-usa-map"
                             onEvents={onMapEvents}
@@ -296,13 +379,17 @@ function USACovidDashboard(props) {
                 <Col>
                     <Button
                         style={{
-                            marginRight: "1px",
+                            marginRight: "10px",
                         }}
+                        variant={btnOutline + "primary"}
                         onClick={showStatesButton}
                     >
                         {showStates ? "Hide States" : "Show States"}
                     </Button>
-                    <Button onClick={clearSelectionButton}>
+                    <Button
+                        variant={btnOutline + "primary"}
+                        onClick={clearSelectionButton}
+                    >
                         Clear Selection
                     </Button>
                 </Col>
@@ -325,6 +412,7 @@ function USACovidDashboard(props) {
                                                 marginRight: "1px",
                                                 marginBottom: "1px",
                                             }}
+                                            variant={btnOutline + "secondary"}
                                             onClick={() => addState(el.State)}
                                             key={i}
                                         >
@@ -341,7 +429,7 @@ function USACovidDashboard(props) {
                                             marginRight: "1px",
                                             marginBottom: "1px",
                                         }}
-                                        variant="success"
+                                        variant={btnOutline + "success"}
                                         onClick={() => removeState(el)}
                                         key={i}
                                     >
@@ -364,7 +452,7 @@ function USACovidDashboard(props) {
                                             marginRight: "1px",
                                             marginBottom: "1px",
                                         }}
-                                        variant="success"
+                                        variant={btnOutline + "success"}
                                         onClick={() => removeState(el)}
                                         key={i}
                                     >
@@ -378,7 +466,7 @@ function USACovidDashboard(props) {
             )}
             <Row>
                 <Col>
-                    <div style={{ height: "700px" }}>
+                    <div style={{ height: "700px", marginTop: "2vh" }}>
                         <ReactEcharts
                             option={getUSALineEchartOption(
                                 selectionStates,

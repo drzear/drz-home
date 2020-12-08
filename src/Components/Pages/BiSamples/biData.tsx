@@ -129,7 +129,7 @@ export interface CountryData {
 export const usaDiseases = {
     // "Alzheimer disease (G30)": 1,
     "COVID-19 (U071, Multiple Cause of Death)": 1,
-    "COVID-19 (U071, Underlying Cause of Death)": 1,
+    // "COVID-19 (U071, Underlying Cause of Death)": 1,
     // "Cerebrovascular diseases (I60-I69)": 1,
     // "Chronic lower respiratory diseases (J40-J47)": 1,
     // "Diabetes mellitus (E10-E14)": 1,
