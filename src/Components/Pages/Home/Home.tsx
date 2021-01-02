@@ -53,7 +53,7 @@ class Home extends React.Component<HomeProps, HomeState> {
                         }
                         style={{
                             backgroundImage: `url(${require("../../../Images/hills.JPG")})`,
-                            backgroundPosition: "center top",
+                            backgroundPosition: "center",
                         }}
                         onClick={() => this.handleOnClick("/cv")}
                     >

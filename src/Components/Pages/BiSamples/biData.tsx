@@ -128,7 +128,7 @@ export interface CountryData {
 
 export const usaDiseases = {
     // "Alzheimer disease (G30)": 1,
-    "COVID-19 (U071, Multiple Cause of Death)": 1,
+    "COVID-19 (U071, Multiple Cause of Death)": "COVID-19",
     // "COVID-19 (U071, Underlying Cause of Death)": 1,
     // "Cerebrovascular diseases (I60-I69)": 1,
     // "Chronic lower respiratory diseases (J40-J47)": 1,
@@ -141,5 +141,5 @@ export const usaDiseases = {
     // "Other diseases of respiratory system (J00-J06,J30-J39,J67,J70-J98)": 1,
     // "Septicemia (A40-A41)": 1,
     // "Symptoms, signs and abnormal clinical and laboratory findings, not elsewhere classified (R00-R99)": 1,
-    "All Cause": 1,
+    "All Cause": "All Causes",
 };

@@ -1,7 +1,7 @@
 import React from "react";
 import { Container, Media, Row } from "react-bootstrap";
 import "./Contact.css";
-import CV from "../../../Documents/CV-DRZear.pdf";
+// import CV from "../../../Documents/CV-DRZear.pdf";
 
 function Contact() {
     return (
@@ -57,11 +57,6 @@ function Contact() {
                             />
                         </a>
                     </Media>
-                </Row>
-                <Row className="justify-content-center cv-as-pdf-div">
-                    <a href={CV} target="_blank" rel="noopener noreferrer">
-                        <p className="cv-as-pdf">CV as PDF</p>
-                    </a>
                 </Row>
             </Container>
         </>

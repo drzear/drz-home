@@ -7,4 +7,5 @@
     color: var(--text) !important;
     cursor: default;
     pointer-events: none;
+    font-weight: bold;
 }

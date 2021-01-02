@@ -6,7 +6,7 @@ import USACovidDashboard from "./USACovidDashboard/USACovidDashboard";
 
 function BiSamples(props) {
     const [selectedDash, setSelectedDash] = useState("USA Covid");
-    const dashboards = ["Fake Business", "USA Covid"];
+    const dashboards = ["USA Covid", "Business"];
     return (
         <Container className="bi-container">
             <Row
@@ -34,7 +34,7 @@ function BiSamples(props) {
                     );
                 })}
             </Row>
-            {selectedDash === "Fake Business" && <div>Under construction</div>}
+            {selectedDash === "Business" && <div>Under construction</div>}
             {selectedDash === "USA Covid" && (
                 <USACovidDashboard theme={props.theme}></USACovidDashboard>
             )}

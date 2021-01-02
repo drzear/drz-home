@@ -260,7 +260,8 @@ function WorldCovidDashboard(props) {
     const processedMapData = processMapData(covidData, selectionMap);
     const onMapClick = (event) => {
         if (event.data && event.data.name) {
-            addState(event.data.name);
+            // ???
+            // addState(event.data.name);
         }
     };
     const onMapEvents = {

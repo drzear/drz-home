@@ -73,7 +73,7 @@ class Header extends React.Component<HeaderProps, HeaderState> {
                         onClick={() => this.handleOnClick("/")}
                         className="navlink"
                     >
-                        David Ryne Zear
+                        DRZ
                     </Navbar.Brand>
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                     <Navbar.Collapse

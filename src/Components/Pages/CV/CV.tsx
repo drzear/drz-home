@@ -7,6 +7,9 @@ import echarts from "echarts";
 import world from "../../../Images/world_echarts_big.json";
 import { Button, OverlayTrigger, Row, Tooltip } from "react-bootstrap";
 import { SwitchTransition, CSSTransition } from "react-transition-group";
+import "./CV";
+// @ts-ignore: problem adding PDF types to tsconfig
+import CVPDF from "../../../Documents/CV-DRZear.pdf";
 
 const Line = (props) => {
     const widthMultiplier: number = props.svgWidth / 0.25 <= 700 ? 0.3 : 0.1;
@@ -249,6 +252,12 @@ const renderTooltip = (props) => (
     </Tooltip>
 );
 
+const renderTooltipPDF = (props) => (
+    <Tooltip id="button-tooltip" {...props}>
+        Download CV in PDF format.
+    </Tooltip>
+);
+
 function CV() {
     // window resizing
     const [svgWidth, setSvgWidth] = useState(
@@ -371,19 +380,39 @@ function CV() {
                                 style={{
                                     flex: 1,
                                     marginTop: "1vh",
-                                    marginBottom: "1vh",
+                                    marginRight: "1px",
                                 }}
                             >
                                 <i>i</i>
                             </Button>
                         </OverlayTrigger>
+                        <OverlayTrigger
+                            placement="right"
+                            delay={{ show: 250, hide: 400 }}
+                            overlay={renderTooltipPDF}
+                        >
+                            <Button
+                                variant="secondary"
+                                style={{
+                                    flex: 6,
+                                    marginTop: "1vh",
+                                }}
+                                href={CVPDF}
+                                target="_blank"
+                            >
+                                <i>PDF</i>
+                            </Button>
+                        </OverlayTrigger>
+                    </Row>
+                    <Row className="mx-0">
                         <Button
                             onClick={handleNextClick}
                             variant="secondary"
                             style={{
                                 flex: 3,
-                                marginTop: "1vh",
+                                marginTop: "5px",
                                 marginBottom: "1vh",
+                                marginRight: "1px",
                             }}
                         >
                             {"<"}
@@ -394,7 +423,7 @@ function CV() {
                             style={{
                                 flex: 3,
                                 // width: 0.4 * svgWidth,
-                                marginTop: "1vh",
+                                marginTop: "5px",
                                 marginBottom: "1vh",
                             }}
                         >

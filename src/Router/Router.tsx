@@ -1,14 +1,17 @@
-import React from "react";
+import React, { Suspense, lazy } from "react";
 import Home from "../Components/Pages/Home/Home";
 import About from "../Components/Pages/About/About";
-import BiSamples from "../Components/Pages/BiSamples/BiSamples";
+// import BiSamples from "../Components/Pages/BiSamples/BiSamples";
 import Contact from "../Components/Pages/Contact/Contact";
 import CV from "../Components/Pages/CV/CV";
 import { BrowserRouter, Route, Redirect, Switch } from "react-router-dom";
 import Header from "../Components/Pieces/Header/Header";
 
+const BiSamples = lazy(() => import("../Components/Pages/BiSamples/BiSamples"));
+
 interface Props {
-    onThemeClick: Function;
+    // ???
+    // onThemeClick: Function;
 }
 
 interface State {
@@ -38,57 +41,70 @@ class MyRouter extends React.Component<Props, State> {
         return (
             <>
                 <BrowserRouter basename="/">
-                    <Switch>
-                        <Route
-                            exact
-                            path="/about"
-                            render={(props) => (
-                                <DefaultContainer
-                                    {...props}
-                                    onThemeSwitch={this.handleThemeClick}
-                                    theme={this.state.theme}
-                                />
-                            )}
-                        />
-                        <Route
-                            exact
-                            path="/dashboards"
-                            render={(props) => (
-                                <DefaultContainer
-                                    {...props}
-                                    onThemeSwitch={this.handleThemeClick}
-                                    theme={this.state.theme}
-                                />
-                            )}
-                        />
-                        <Route
-                            exact
-                            path="/cv"
-                            render={(props) => (
-                                <DefaultContainer
-                                    {...props}
-                                    onThemeSwitch={this.handleThemeClick}
-                                    theme={this.state.theme}
-                                />
-                            )}
-                        />
-                        <Route
-                            exact
-                            path="/contact"
-                            render={(props) => (
-                                <DefaultContainer
-                                    {...props}
-                                    onThemeSwitch={this.handleThemeClick}
-                                    theme={this.state.theme}
-                                />
-                            )}
-                        />
-                        <Route exact path="/home" component={HomeContainer} />
-                        <Route exact path="/" component={HomeContainer} />
-                        <Route>
-                            <Redirect to="/" />
-                        </Route>
-                    </Switch>
+                    {/* <Suspense fallback={<div>Loading...</div>}> */}
+                    <Suspense
+                        fallback={
+                            <LoadingContainer
+                                onThemeSwitch={this.handleThemeClick}
+                            />
+                        }
+                    >
+                        <Switch>
+                            <Route
+                                exact
+                                path="/about"
+                                render={(props) => (
+                                    <DefaultContainer
+                                        {...props}
+                                        onThemeSwitch={this.handleThemeClick}
+                                        theme={this.state.theme}
+                                    />
+                                )}
+                            />
+                            <Route
+                                exact
+                                path="/dashboards"
+                                render={(props) => (
+                                    <DefaultContainer
+                                        {...props}
+                                        onThemeSwitch={this.handleThemeClick}
+                                        theme={this.state.theme}
+                                    />
+                                )}
+                            />
+                            <Route
+                                exact
+                                path="/cv"
+                                render={(props) => (
+                                    <DefaultContainer
+                                        {...props}
+                                        onThemeSwitch={this.handleThemeClick}
+                                        theme={this.state.theme}
+                                    />
+                                )}
+                            />
+                            <Route
+                                exact
+                                path="/contact"
+                                render={(props) => (
+                                    <DefaultContainer
+                                        {...props}
+                                        onThemeSwitch={this.handleThemeClick}
+                                        theme={this.state.theme}
+                                    />
+                                )}
+                            />
+                            <Route
+                                exact
+                                path="/home"
+                                component={HomeContainer}
+                            />
+                            <Route exact path="/" component={HomeContainer} />
+                            <Route>
+                                <Redirect to="/" />
+                            </Route>
+                        </Switch>
+                    </Suspense>
                 </BrowserRouter>
             </>
         );
@@ -99,6 +115,13 @@ const HomeContainer = () => (
     <>
         <Route exact path="/home" component={Home} />
         <Route path="/" component={Home} />
+    </>
+);
+
+const LoadingContainer = (props) => (
+    <>
+        <Header onThemeSwitch={props.onThemeSwitch} />
+        <div>Loading...</div>
     </>
 );
 
