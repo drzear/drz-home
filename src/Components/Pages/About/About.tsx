@@ -1,51 +1,22 @@
 import React from "react";
-import { Container } from "react-bootstrap";
 import "./About.css";
 
-class About extends React.Component {
-    render() {
-        return (
-            <>
-                <Container className="about-div">
-                    <h3 className="about-h">About Me</h3>
+function About () {
+    const angle = 6;
+    const angleRad = angle * Math.PI / 180;
+    const magicNumber = Math.abs( Math.tan(angleRad) / 2 );    
+    console.log(magicNumber);
+
+    return (
+        <>
+            <div className="diagonal-box about">
+                <div className="about-div container content about">
+                    <h3 className="about-h">about me</h3>
                     <p className="about-para">
-                        Hi, my name is David{" "}
-                        <span role="img" aria-label="wave">
-                            👋
-                        </span>
-                        . I also go by{" "}
-                        <a
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            href="https://en.wikipedia.org/wiki/Ryne_Sandberg"
-                            title="Ryne Sandberg, Cubs baseball great"
-                        >
-                            Ryne
-                        </a>{" "}
-                        . I'm a full-stack BI developer who was born and raised
-                        in{" "}
-                        <a
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            href="https://www.google.com/maps/place/Iowa+City,+IA,+USA/@41.64716,-91.6094031,12z/data=!3m1!4b1!4m5!3m4!1s0x87e441c16a208817:0x6d711867870582b0!8m2!3d41.6611277!4d-91.5301683"
-                            title="Iowa City on Google Maps"
-                        >
-                            Iowa City, Iowa, USA
-                        </a>{" "}
-                        and moved to{" "}
-                        <a
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            href="https://www.google.com/maps/place/Stockholm/@59.3261917,17.7018811,10z/data=!3m1!4b1!4m5!3m4!1s0x465f763119640bcb:0xa80d27d3679d7766!8m2!3d59.3293235!4d18.0685808"
-                            title="Stockholm on Google Maps"
-                        >
-                            Stockholm, SE
-                        </a>{" "}
-                        in 2017.
-                        <br />
-                        <br />
-                        After relocating to Sweden with my wife, I changed
-                        fields from Biology to data and programming. From
+                        I graduated from the University of Iowa in 2007 with a B.S. in Biology. From 2008 to 20015 I worked a variety 
+                        of biology-related jobs, trying to figure out what I enjoy doing. 
+                        I relocated to Sweden with my wife in 2017 and decided to use the change of scenery to change fields
+                        from Biology to data and programming. From
                         2018-2019 I worked as a Data Analyst for Radisson Hotel
                         Group in Sweden and currently work as a BI developer for
                         Radisson Hotel Group in Belgium (while still being based
@@ -67,14 +38,14 @@ class About extends React.Component {
                         <a
                             target="_blank"
                             rel="noopener noreferrer"
-                            href="https://www.worldofwarcraft.com"
-                            title="WoW, my all-time favorite"
+                            href="https://en.wikipedia.org/wiki/Mario_Kart_8"
+                            title="Mario Kart 8 Deluxe, my current favorite"
                         >
                             video
                         </a>{" "}
                         games, and learn new things.
                     </p>
-                    <h3 className="about-h">About This Site</h3>
+                    <h3 className="about-h">about this site</h3>
                     <p className="about-para">
                         This site was made using{" "}
                         <a
@@ -94,7 +65,16 @@ class About extends React.Component {
                         >
                             Typescript
                         </a>{" "}
-                        (gotta love static typing), and{" "}
+                        ,{" "}
+                        <a
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            href="https://tailwindcss.com/"
+                            title="Tailwind css"
+                        >
+                            Tailwindcss
+                        </a>{" "}
+                        , and{" "}
                         <a
                             target="_blank"
                             rel="noopener noreferrer"
@@ -117,9 +97,9 @@ class About extends React.Component {
                         </a>
                         .
                     </p>
-                </Container>
-            </>
-        );
-    }
+                </div>
+            </div>
+        </>
+    );
 }
 export default About;

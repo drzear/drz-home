@@ -14,3 +14,32 @@
         transform: rotate(360deg);
     }
 }
+:root {
+    --angle: -6deg;
+    --width: 100vw;
+    --magic-number: 0.05255211763283823;
+    --skew-padding: calc(var(--width) * var(--magic-number));
+    --info-bottom-margin-top: 0;
+}
+.diagonal-box {
+    position: relative;
+    padding: var(--skew-padding) 0;
+    margin-top: -1px;
+}
+.diagonal-box:before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    transform: skewy(var(--angle));
+    transform-origin: 50% 0;
+    outline: 1px solid transparent;
+    backface-visibility: hidden;
+}
+.content {
+    margin: 0 auto;
+    padding: 1.5em;
+    position: relative;
+}

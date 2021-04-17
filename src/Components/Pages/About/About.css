@@ -1,9 +1,10 @@
 .about-para {
-    color: var(--text);
+    color: #212529;
 }
 .about-h {
-    color: var(--text);
+    color: #212529;
     padding-top: 1vh;
+    text-align: center;
 }
 @keyframes pageEntrance {
     from {
@@ -13,6 +14,9 @@
         opacity: 1;
     }
 }
-.about-div {
-    animation: pageEntrance 700ms ease-out;
+.diagonal-box.about {
+    color: #212529;
+}
+.diagonal-box.about:before {
+    background-color: white;
 }

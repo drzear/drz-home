@@ -42,3 +42,11 @@
     color: white !important;
     font-weight: bold;
 }
+.content-info {
+    padding-top: 6rem;
+    height: 45vh;
+}
+.sticky-info + .content-info {
+    padding-top: 13rem;
+    height: calc(45vh + 7rem);
+}

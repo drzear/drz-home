@@ -120,14 +120,14 @@ const HomeContainer = () => (
 
 const LoadingContainer = (props) => (
     <>
-        <Header onThemeSwitch={props.onThemeSwitch} />
+        {/* <Header onThemeSwitch={props.onThemeSwitch} /> */}
         <div>Loading...</div>
     </>
 );
 
 const DefaultContainer = (props) => (
     <>
-        <Header onThemeSwitch={props.onThemeSwitch} />
+        {/* <Header onThemeSwitch={props.onThemeSwitch} /> */}
         <Route exact path="/about" component={About} />
         <Route
             exact
