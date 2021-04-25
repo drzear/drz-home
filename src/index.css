@@ -2,7 +2,10 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
+/* Theme variables that will be used throughout the project */
+:root {
+    --dynColor: hsl(0, 100%, 100%);
+}
 body {
     margin: 0;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
@@ -10,62 +13,12 @@ body {
         "Helvetica Neue", sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    /* background: var(--bg) !important;
-    background-color: var(--bg) !important; */
-    transition: background 500ms ease-in-out, color 1000ms ease-in-out;
+    background-color: var(--dynColor) !important;
 }
-
 code {
     font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
         monospace;
 }
-
-/* Theme variables that will be used throughout the project */
-:root {
-    --gray0: #f8f8f8;
-    --gray1: #dbe1e8;
-    --gray2: #b2becd;
-    --gray3: #6c7983;
-    --gray4: #454e56;
-    --gray5: #2a2e35;
-    --gray6: #12181b;
-    --blue: #0084a5;
-    --purple: #a82dd1;
-    --yellow0: #faf6bb;
-    --yellow1: #fff565;
-}
-
-.light {
-    /* --bg: linear-gradient(to right, var(--gray3), var(--yellow1)); */
-    --bg: white;
-    /* --bg-nav: linear-gradient(to right, var(--yellow1), var(--gray3)); */
-    --bg-nav: linear-gradient(to right, var(--gray5), var(--gray6));
-    --bg-dropdown: var(--gray0);
-    --text: var(--gray6);
-    /* --text-nav: var(--gray6); */
-    --text-nav: var(--gray2);
-    --text-home: var(--gray0);
-    --border-color: var(--blue);
-    --bg-solar: var(--yellow);
-    --text-hadow-home: var(--gray6);
-    --shadow-box: var(--gray6);
-    --shadow-box-hover: var(--gray6);
-}
-
-.dark {
-    --bg: linear-gradient(to right, var(--gray6), var(--gray5));
-    --bg-nav: linear-gradient(to right, var(--gray5), var(--gray6));
-    --bg-dropdown: var(--gray6);
-    --text: var(--gray0);
-    --text-nav: var(--gray2);
-    --text-home: var(--gray0);
-    --border-color: var(--purple);
-    --bg-solar: var(--blue);
-    --text-hadow-home: var(--gray6);
-    --shadow-box: var(--gray0);
-    --shadow-box-hover: var(--gray0);
-}
-
-body.no-duration * {
-    animation-duration: 0s !important;
+html {
+    scroll-behavior: smooth;
 }

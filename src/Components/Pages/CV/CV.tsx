@@ -86,7 +86,7 @@ const SlideShow = (props: { data: cvDataInt }) => {
                             ? imageArray[currentImage]
                             : imageArray[0]) +
                         "").default}
-                    className="slideshow-image"
+                    className="max-h-full max-w-full h-auto w-auto border-white border-solid border-2"
                     alt=""
                 />
             </CSSTransition>
@@ -187,15 +187,6 @@ const getEchartOption = (selection: cvDataInt) => {
     };
 };
 
-const cumulativeOffset = function(element) {
-    let top = 0;
-    do {
-        top += element.offsetTop  || 0;
-        element = element.offsetParent;
-    } while (element);
-    return top;
-};
-
 function parseData(): any[] {
     let firstDate = 999999;
     let latestDate = 0;
@@ -283,68 +274,13 @@ function CV() {
     const [initialClientY, setInitialClientY] = useState(0);
     const [finalClientY, setFinalClientY] = useState(0);
     const [currentlyHovered, setCurrentlyHovered] = useState(cvData.length - 1);
-    // for stickying info-div
-    const [endStickyTrigger, setEndStickyTrigger] = useState(0);
-    const [topOffset, setTopOffset] = useState(0);
-    // const [stickied, setStickied] = useState(false);
-    // const [stickiedBottom, setStickiedBottom] = useState(false);
-    const [infoDivOffset, setInfoDivOffset] = useState(0);
-
-    // scroll listener
-    useEffect(() => {
-        console.log('scroll');
-        const listenToScroll = () => {
-            let infoDiv = document.getElementById("info-div");
-            setTopOffset((document.getElementById("navbar")?.offsetHeight || 0));
-            const newCumuInfoOffset = cumulativeOffset(document.getElementById("info-div"));
-            if (newCumuInfoOffset - topOffset - 24 <= 0) {
-            } else {
-                setInfoDivOffset(cumulativeOffset(document.getElementById("info-div")) - parseFloat(infoDiv?.style.getPropertyValue("--info-bottom-margin-top") || '0'));
-            }
-            const stickyTrigger = infoDivOffset - 128;  // 128 is header + padding
-            console.log('infoDivOffset: ' + infoDivOffset, 'stickyTrigger: ' + stickyTrigger, 'windowoffset: ' + window.pageYOffset, 'endstickytrig: ' + endStickyTrigger);
-            if (window.pageYOffset > stickyTrigger && (window.pageYOffset) < endStickyTrigger) {
-                console.log(1);
-                infoDiv?.style.setProperty("--info-bottom-margin-top", "0px");
-                infoDiv?.classList.add("info-sticky");
-                // setStickied(true);
-                // setStickiedBottom(false);
-            } else if (window.pageYOffset >= endStickyTrigger) {
-                console.log(2);
-                infoDiv?.classList.remove("info-sticky");
-                infoDiv?.style.setProperty("--info-bottom-margin-top", (svgHeight - window.innerHeight + 250).toString() + "px");
-                // marginTop: stickiedBottom ? svgHeight - window.innerHeight + 250 : undefined,info-bottom-margin-top
-                // setStickied(false);
-                // setStickiedBottom(true);
-            } else {
-                console.log(3);
-                infoDiv?.classList.remove("info-sticky");
-                infoDiv?.style.setProperty("--info-bottom-margin-top", "0px");
-                // setStickied(false);
-                // setStickiedBottom(false);
-            }
-        }
-        window.addEventListener('scroll', listenToScroll);
-        return () => {
-            window.removeEventListener('scroll', listenToScroll);
-        }
-    }, [endStickyTrigger, infoDivOffset, topOffset]);
     // register world map
     useEffect(() => {
-        console.log('worldmap')
         echarts.registerMap("world", world, {});
-
-        setTimeout(() => {
-            setTopOffset((document.getElementById("navbar")?.offsetHeight || 0));
-            setInfoDivOffset(cumulativeOffset(document.getElementById("info-div")));
-            // setEndStickyTrigger(cumulativeOffset(document.getElementById("timeline-div")) + (document.getElementById("timeline-div")?.offsetHeight || 0) - 100);
-            setEndStickyTrigger(cumulativeOffset(document.getElementById("timeline-div")) + (svgHeight - window.innerHeight + 250) - 128);
-        }, 0);
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
     // window resize event listener
     useEffect(() => {
-        console.log('resize');
         const handleResize = () => {
             setSvgWidth(
                 window.innerWidth >= 1600
@@ -354,34 +290,14 @@ function CV() {
                     : window.innerWidth * 0.3
             );
             setHeight(window.innerHeight);
-            setTopOffset((document.getElementById("navbar")?.offsetHeight || 0) + 24);
-            setInfoDivOffset(cumulativeOffset(document.getElementById("info-div")));
-            const stickyTrigger = infoDivOffset - topOffset - 24;
-            // setEndStickyTrigger(cumulativeOffset(document.getElementById("timeline-div")) + (document.getElementById("timeline-div")?.offsetHeight || 0) - 100);
-            setEndStickyTrigger(cumulativeOffset(document.getElementById("timeline-div")) + (svgHeight - window.innerHeight + 250) - 128);
-            let infoDiv = document.getElementById("info-div");
-            if (window.pageYOffset > stickyTrigger && window.pageYOffset < endStickyTrigger) {
-                infoDiv?.classList.add("info-sticky");
-                // setStickied(true);
-                // setStickiedBottom(false);
-            } else if (window.pageYOffset >= endStickyTrigger) {
-                infoDiv?.classList.remove("info-sticky");
-                // setStickied(false);
-                // setStickiedBottom(true);
-            } else {
-                infoDiv?.classList.remove("info-sticky");
-                // setStickied(false);
-                // setStickiedBottom(false);
-            }
         };
         window.addEventListener("resize", handleResize);
         return () => {
             window.removeEventListener("resize", handleResize);
         };
-    }, [endStickyTrigger, infoDivOffset, topOffset]);
+    }, []);
     // timeline keypress detection
     useEffect(() => {
-        console.log('timeline')
         // next and back on timeline buttons
         const handleBackClick = () => {
             const bla =
@@ -408,8 +324,7 @@ function CV() {
         return () => {
             document.removeEventListener("keydown", handleKeydown);
         };
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    }, [currentlyHovered]);
     // mouse hover over timeline
     const handleLineMouseEnter = (line: number) => {
         setCurrentlyHovered(line);
@@ -458,221 +373,201 @@ function CV() {
         <>
             <div className="diagonal-box cv">
                 <div
-                    className="cv-container content cv"
+                    id="cv"
+                    className="cv-container container content cv"
                     onTouchStart={handleTouchStart}
                     onTouchMove={handleTouchMove}
                     onTouchEnd={handleTouchEnd}
                     style={{
                         height: svgHeight + 300,
-                        // position: stickiedBottom ? 'relative' : undefined
                     }}
                 >
-                    <h2 className=" h-20 text-center text-white font-bold">timeline</h2>
-                    <div id="timeline-div" className="timeline-div">
-                        <Row className="mx-0">
-                            <OverlayTrigger
-                                placement="right"
-                                delay={{ show: 250, hide: 400 }}
-                                overlay={renderTooltip}
-                            >
+                    <div className="row justify-center">
+                        <h2 className=" h-20 text-center text-white font-bold">timeline</h2>
+                    </div>
+                    <div className="row">
+                        <div id="timeline-div" className="timeline-div col-4">
+                            <Row className="mx-0">
+                                <OverlayTrigger
+                                    placement="right"
+                                    delay={{ show: 250, hide: 400 }}
+                                    overlay={renderTooltip}
+                                >
+                                    <Button
+                                        variant="info"
+                                        style={{
+                                            flex: 1,
+                                            marginTop: "1vh",
+                                            marginRight: "1px",
+                                        }}
+                                    >
+                                        <i>i</i>
+                                    </Button>
+                                </OverlayTrigger>
+                                <OverlayTrigger
+                                    placement="right"
+                                    delay={{ show: 250, hide: 400 }}
+                                    overlay={renderTooltipPDF}
+                                >
+                                    <Button
+                                        variant="secondary"
+                                        style={{
+                                            flex: 6,
+                                            marginTop: "1vh",
+                                        }}
+                                        href={CVPDF}
+                                        target="_blank"
+                                    >
+                                        <i>PDF</i>
+                                    </Button>
+                                </OverlayTrigger>
+                            </Row>
+                            <Row className="mx-0">
                                 <Button
-                                    variant="info"
+                                    onClick={handleNextClick}
+                                    variant="secondary"
                                     style={{
-                                        flex: 1,
-                                        marginTop: "1vh",
+                                        flex: 3,
+                                        marginTop: "5px",
+                                        marginBottom: "1vh",
                                         marginRight: "1px",
                                     }}
                                 >
-                                    <i>i</i>
+                                    {"<"}
                                 </Button>
-                            </OverlayTrigger>
-                            <OverlayTrigger
-                                placement="right"
-                                delay={{ show: 250, hide: 400 }}
-                                overlay={renderTooltipPDF}
-                            >
                                 <Button
-                                    variant="secondary"
+                                    onClick={handleBackClick}
+                                    variant="primary"
                                     style={{
-                                        flex: 6,
-                                        marginTop: "1vh",
+                                        flex: 3,
+                                        marginTop: "5px",
+                                        marginBottom: "1vh",
                                     }}
-                                    href={CVPDF}
-                                    target="_blank"
                                 >
-                                    <i>PDF</i>
+                                    {">"}
                                 </Button>
-                            </OverlayTrigger>
-                        </Row>
-                        <Row className="mx-0">
-                            <Button
-                                onClick={handleNextClick}
-                                variant="secondary"
-                                style={{
-                                    flex: 3,
-                                    marginTop: "5px",
-                                    marginBottom: "1vh",
-                                    marginRight: "1px",
-                                }}
+                            </Row>
+                            <svg className="-ml-5 " height={svgHeight} width={svgWidth}>
+                                <line
+                                    className="timeline-line"
+                                    strokeWidth="2"
+                                    x1={0.8 * svgWidth}
+                                    x2={0.8 * svgWidth}
+                                    y1={cvData[0]["y1"]}
+                                    y2={svgHeight}
+                                />
+                                {yearMarkers.map((el, i) => {
+                                    return (
+                                        <line
+                                            className="timeline-line"
+                                            strokeWidth="2"
+                                            x1={0.15 * svgWidth}
+                                            x2={0.8 * svgWidth}
+                                            y1={el.position * svgHeight}
+                                            y2={el.position * svgHeight}
+                                            key={i}
+                                        />
+                                    );
+                                })}
+                                {yearMarkers.map((el, i) => {
+                                    return (
+                                        <text
+                                            className="timeline-year-text"
+                                            x={0.15 * svgWidth}
+                                            y={el.position * svgHeight - 5}
+                                            key={i}
+                                        >
+                                            {el.year}
+                                        </text>
+                                    );
+                                })}
+                                {reverseCvData.map((el, i) => {
+                                    return (
+                                        <Line
+                                            onMouseEnter={() => handleLineMouseEnter(i)}
+                                            onMouseLeave={() => handleLineMouseLeave()}
+                                            x1={0.8}
+                                            x2={0.8}
+                                            y1={el["y1"]}
+                                            y2={el["y2"]}
+                                            svgHeight={svgHeight}
+                                            svgWidth={svgWidth}
+                                            stroke={colorArrays[el.category][i % 2]}
+                                            currentlyHovered={currentlyHovered === i}
+                                            key={i}
+                                        />
+                                    );
+                                })}
+                            </svg>
+                        </div>
+                        <div 
+                            id="info-div" 
+                            className={"info-div text-xs md:text-sm lg:text-base md:pl-3 md:pr-3 col-8"}
+                            style={{}}
                             >
-                                {"<"}
-                            </Button>
-                            <Button
-                                onClick={handleBackClick}
-                                variant="primary"
-                                style={{
-                                    flex: 3,
-                                    // width: 0.4 * svgWidth,
-                                    marginTop: "5px",
-                                    marginBottom: "1vh",
-                                }}
+                            <div className="items-center content-center h-1/6 grid grid-cols-3 gap-2 shadow-smYellow md:shadow-mdYellow border-white border-2 border-solid">
+                                <div className="logo-div h-full flex content-center justify-center items-center">
+                                    <img
+                                        src={require("../../../Images/Logos/" +
+                                            reverseCvData[currentlyHovered].image +
+                                            "").default}
+                                        className="logo max-h-full border-white border-2 border-solid"
+                                        alt=""
+                                    />
+                                </div>
+                                <div className="title-company">
+                                    <span className="para">
+                                        <div className="-mb-0 md:mb-5 font-bold">{reverseCvData[currentlyHovered].title}</div>
+                                        <div>{reverseCvData[currentlyHovered].company}</div>
+                                    </span>
+                                </div>
+                                <div className="">
+                                    <span className="para">
+                                        <div className="-mb-0 md:mb-5 italic">
+                                            {reverseCvData[currentlyHovered].startDate}{" "}
+                                            - {reverseCvData[currentlyHovered].endDate}
+                                        </div>
+                                        <div>{reverseCvData[currentlyHovered].location}</div>
+                                    </span>
+                                </div>
+                            </div>
+                            <div
+                                className={
+                                    reverseCvData[currentlyHovered].category ===
+                                    "Travel"
+                                        ? "p-2 shadow-smYellow md:shadow-mdYellow border-white border-2 border-solid h-3/6 mt-4 mb-4 flex justify-center items-center content-center"
+                                        : "grid p-2 shadow-smYellow md:shadow-mdYellow border-white border-2 border-solid h-3/6 mt-4 mb-4"
+                                }
                             >
-                                {">"}
-                            </Button>
-                        </Row>
-                        <svg height={svgHeight} width={svgWidth}>
-                            <line
-                                className="timeline-line"
-                                strokeWidth="2"
-                                x1={0.8 * svgWidth}
-                                x2={0.8 * svgWidth}
-                                y1={cvData[0]["y1"]}
-                                y2={svgHeight}
-                            />
-                            {yearMarkers.map((el, i) => {
-                                return (
-                                    <line
-                                        className="timeline-line"
-                                        strokeWidth="2"
-                                        x1={0.15 * svgWidth}
-                                        x2={0.8 * svgWidth}
-                                        y1={el.position * svgHeight}
-                                        y2={el.position * svgHeight}
-                                        key={i}
-                                    />
-                                );
-                            })}
-                            {yearMarkers.map((el, i) => {
-                                return (
-                                    <text
-                                        className="timeline-year-text"
-                                        x={0.15 * svgWidth}
-                                        y={el.position * svgHeight - 5}
-                                        key={i}
-                                    >
-                                        {el.year}
-                                    </text>
-                                );
-                            })}
-                            {reverseCvData.map((el, i) => {
-                                return (
-                                    <Line
-                                        onMouseEnter={() => handleLineMouseEnter(i)}
-                                        onMouseLeave={() => handleLineMouseLeave()}
-                                        x1={0.8}
-                                        x2={0.8}
-                                        y1={el["y1"]}
-                                        y2={el["y2"]}
-                                        svgHeight={svgHeight}
-                                        svgWidth={svgWidth}
-                                        stroke={colorArrays[el.category][i % 2]}
-                                        currentlyHovered={currentlyHovered === i}
-                                        key={i}
-                                    />
-                                );
-                            })}
-                        </svg>
-                    </div>
-                    <div 
-                        id="info-div" 
-                        className="info-div md:pl-3 md:pr-3"
-                        // className="info-div transform duration-1000 transition-all ease-out"
-                        style={{
-                            // top: stickied ? topOffset : undefined,
-                            // top: stickied ? 0 : undefined,
-                            // marginTop: stickiedBottom ? svgHeight - window.innerHeight + 250 : undefined,
-                            // scrollPaddingTop: topOffset
-                        }}
-                        >
-                        <div className="text-div">
-                            <div className="logo-div top-3-div">
-                                <img
-                                    src={require("../../../Images/Logos/" +
-                                        reverseCvData[currentlyHovered].image +
-                                        "").default}
-                                    className="logo"
-                                    alt=""
+                                {reverseCvData[currentlyHovered].category !==
+                                    "Travel" && (
+                                    <div className="">
+                                        {reverseCvData[
+                                            currentlyHovered
+                                        ].description.map((el, i) => {
+                                            return (
+                                                <span className="para" key={i}>
+                                                    {el}
+                                                    <br />
+                                                </span>
+                                            );
+                                        })}
+                                    </div>
+                                )}
+                                {reverseCvData[currentlyHovered].category ===
+                                    "Travel" && (
+                                    <SlideShow data={reverseCvData[currentlyHovered]} />
+                                )}
+                            </div>
+                            <div id="map-div" className="map-div shadow-smYellow md:shadow-mdYellow border-white border-2 border-solid grid h-1/6">
+                                <ReactEcharts
+                                    option={getEchartOption(
+                                        reverseCvData[currentlyHovered]
+                                    )}
+                                    lazyUpdate={true}
+                                    className="world-map"
                                 />
                             </div>
-                            <div className="title-company top-3-div">
-                                <span className="para">
-                                    <span role="img" aria-label="job title">
-                                        👔
-                                    </span>
-                                    <br />
-                                    <b>{reverseCvData[currentlyHovered].title}</b>
-                                    <br />
-                                    <i>@</i>
-                                    <br />
-                                    {reverseCvData[currentlyHovered].company}
-                                </span>
-                            </div>
-                            <div className="top-3-div">
-                                <span className="para">
-                                    <span role="img" aria-label="time period">
-                                        🕢
-                                    </span>
-                                    <br />
-                                    <i>
-                                        {reverseCvData[currentlyHovered].startDate}{" "}
-                                        - {reverseCvData[currentlyHovered].endDate}
-                                    </i>
-                                    <br />
-                                    <span role="img" aria-label="location">
-                                        🗺️
-                                    </span>
-                                    <br />
-                                    {reverseCvData[currentlyHovered].location}
-                                </span>
-                            </div>
-                        </div>
-                        <div
-                            className={
-                                reverseCvData[currentlyHovered].category ===
-                                "Travel"
-                                    ? "slideshow-div"
-                                    : "text-div"
-                            }
-                        >
-                            {reverseCvData[currentlyHovered].category !==
-                                "Travel" && (
-                                <div className="">
-                                    {reverseCvData[
-                                        currentlyHovered
-                                    ].description.map((el, i) => {
-                                        return (
-                                            <span className="para" key={i}>
-                                                {el}
-                                                <br />
-                                            </span>
-                                        );
-                                    })}
-                                </div>
-                            )}
-                            {reverseCvData[currentlyHovered].category ===
-                                "Travel" && (
-                                <SlideShow data={reverseCvData[currentlyHovered]} />
-                            )}
-                        </div>
-                        <div id="map-div" className="map-div">
-                        {/* <div id="map-div" className="map-div transform duration-1000 transition-all ease-out"> */}
-                            <ReactEcharts
-                                option={getEchartOption(
-                                    reverseCvData[currentlyHovered]
-                                )}
-                                lazyUpdate={true}
-                                className="world-map"
-                            />
                         </div>
                     </div>
                 </div>

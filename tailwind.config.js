@@ -34,6 +34,10 @@ module.exports = {
        '5000': '5000ms',
       },
     },
+    boxShadow: {
+      smYellow: '5px -5px yellow',
+      mdYellow: '10px -10px yellow',
+    },
     colors: {
       transparent: 'transparent',
       current: 'currentColor',

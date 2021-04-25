@@ -1,47 +1,3 @@
-.Spinning-logo {
-}
-
-@media (prefers-reduced-motion: no-preference) {
-    .Spinning-logo {
-        animation: Spinning-logo-spin infinite 10s alternate;
-    }
-}
-
-@keyframes Spinning-logo-spin {
-    /* from {
-        transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(360deg);
-    } */
-    from {
-        opacity: 0.5;
-    }
-    to {
-        opacity: 1;
-    }
-}
-
-.navbar {
-    background: var(--bg-nav);
-}
-.navbar-collapse {
-    color: var(--text-nav);
-}
-
-.navlink {
-    color: var(--text-nav) !important;
-    cursor: pointer;
-}
-
-.navlink:hover {
-    color: white !important;
-}
-
-.active-navlink {
-    color: white !important;
-    font-weight: bold;
-}
 .content-info {
     padding-top: 6rem;
     height: 45vh;
@@ -49,4 +5,8 @@
 .sticky-info + .content-info {
     padding-top: 13rem;
     height: calc(45vh + 7rem);
+    /* background-color: var(--dynColor); */
+}
+#navbar {
+    background-color: var(--dynColor);
 }

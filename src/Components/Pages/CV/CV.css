@@ -4,35 +4,25 @@
     background: rgba(255, 255, 255, 0);
 }
 .timeline-div {
-    left: 0;
-    width: 30vw;
-    position: absolute;
+    max-width: 30vw;
 }
 .timeline-year-text {
     font: bold;
-    fill: var(--text);
+    fill: #f8f8f8;
 }
 .timeline-line {
-    stroke: var(--text);
+    stroke: #f8f8f8;
 }
 .info-div {
-    position: absolute;
-    width: 70vw;
-    height: 90vh;
-    right: 0;
-    margin-top: var(--info-bottom-margin-top);
-}
-.info-sticky {
-    position: fixed !important;
+    position: sticky !important;
+    position: -webkit-sticky !important;
+    max-width: 70vw;
+    height: 80vh;
     top: 128px;
-    /* top: 8rem; */
 }
 .map-div {
-    position: absolute;
     height: 25%;
-    width: 70vw;
-    right: 0;
-    bottom: 0;
+    max-width: 70vw;
 }
 .world-map {
     max-height: "500px";
@@ -45,32 +35,37 @@
     padding-left: 2vw;
     padding-right: 1vw;
 }
-.top-3-div {
-    width: 33.3%;
-}
 .title-company {
     padding-left: 1vw;
     padding-right: 2vw;
 }
 .para {
-    color: var(--text);
+    color: #f8f8f8;
 }
 .logo-div {
     max-height: 12vh;
     text-align: center;
 }
 .logo {
+    max-height: 100%;
     max-width: 100%;
-    height: 100%;
-    border-radius: 10%;
-}
-.slideshow-div {
-    text-align: center;
+    width: auto;
+    height: auto;
 }
 .slideshow-image {
-    max-height: 45vh;
-    max-width: 90%;
+    max-height: 100%;
+    max-width: 100%;
     width: auto;
+    height: auto;
+}
+.box-shadow {
+    box-shadow: 10px -10px yellow;
+    border-color: white;
+    border-width: 2px;
+    border-style: solid;
+}
+.info-middle-div {
+    padding: 8px;
 }
 @media only screen and (max-height: 900px) {
     .info-div {
@@ -119,35 +114,6 @@
     opacity: 0;
     transition: opacity 500ms ease-in;
 }
-@media only screen and (min-width: 900px) {
-    .timeline-div {
-        left: 10vw;
-        width: 20vw;
-    }
-    .info-div {
-        right: 10vw;
-        width: 60vw;
-    }
-    .map-div {
-        /* right: 10vw; */
-        width: 60vw;
-    }
-}
-@media only screen and (min-width: 1600px) {
-    .timeline-div {
-        left: 20vw;
-        width: 15vw;
-    }
-    .info-div {
-        right: 20vw;
-        width: 45vw;
-    }
-    .map-div {
-        /* right: 20vw; */
-        width: 45vw;
-    }
-}
-
 .diagonal-box.cv {
     color: white;
 }

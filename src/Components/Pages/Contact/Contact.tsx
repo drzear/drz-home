@@ -6,7 +6,7 @@ function Contact() {
     return (
         <>
             <div className="diagonal-box contact">
-                <Container className="contact-container content contact">
+                <Container id="contact" className="contact-container content contact">
                     <Row className="justify-content: center">
                         <Col>
                             <h2 className="text-center mb-3">contact</h2>

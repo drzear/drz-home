@@ -1,31 +1,19 @@
 .contact-container {
     animation: pageEntrance 700ms ease-out;
-    color: var(--text);
+    color: #f8f8f8;
 }
 .contact-logo {
     border-radius: 5%;
     width: 10vw;
+    max-width: 100px;
     height: auto;
     margin-top: 1vh;
 }
 .contact-logo-linkedin {
     border-radius: 10%;
     width: 10vw;
+    max-width: 100px;
     height: auto;
-    margin-top: 1vh;
-}
-.cv-as-pdf {
-    background-color: var(--text);
-    border-radius: 55%;
-    color: var(--bg-dropdown);
-    font-size: 3vw;
-    padding-left: 1vw;
-    padding-right: 1vw;
-    height: 8vh;
-    display: table-cell;
-    vertical-align: middle;
-}
-.cv-as-pdf-div {
     margin-top: 1vh;
 }
 @media only screen and (max-height: 700) {

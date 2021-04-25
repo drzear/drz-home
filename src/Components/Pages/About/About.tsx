@@ -2,15 +2,16 @@ import React from "react";
 import "./About.css";
 
 function About () {
-    const angle = 6;
-    const angleRad = angle * Math.PI / 180;
-    const magicNumber = Math.abs( Math.tan(angleRad) / 2 );    
-    console.log(magicNumber);
+    // magic number calculations for later
+    // const angle = 6;
+    // const angleRad = angle * Math.PI / 180;
+    // const magicNumber = Math.abs( Math.tan(angleRad) / 2 );    
+    // console.log(magicNumber);
 
     return (
         <>
             <div className="diagonal-box about">
-                <div className="about-div container content about">
+                <div id="about" className="about-div container content about">
                     <h3 className="about-h">about me</h3>
                     <p className="about-para">
                         I graduated from the University of Iowa in 2007 with a B.S. in Biology. From 2008 to 20015 I worked a variety 
@@ -74,7 +75,7 @@ function About () {
                         >
                             Tailwindcss
                         </a>{" "}
-                        , and{" "}
+                        (right now it's a mix of Bootstrap and Tailwind since it started with Bootstrap), and{" "}
                         <a
                             target="_blank"
                             rel="noopener noreferrer"
@@ -83,10 +84,7 @@ function About () {
                         >
                             Echarts
                         </a>
-                        .
-                        <br />
-                        {/* <br /> */}
-                        You can find the source code{" "}
+                        . You can find the source code{" "}
                         <a
                             target="_blank"
                             rel="noopener noreferrer"
