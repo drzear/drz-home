@@ -5,7 +5,6 @@ import { cvData, colorArrays, cvDataInt } from "./cvData";
 import ReactEcharts from "echarts-for-react";
 import echarts from "echarts";
 import world from "../../../Images/world_echarts_big.json";
-import { Button, OverlayTrigger, Row, Tooltip } from "react-bootstrap";
 import { SwitchTransition, CSSTransition } from "react-transition-group";
 import "./CV";
 // @ts-ignore: problem adding PDF types to tsconfig
@@ -243,21 +242,6 @@ function parseData(): any[] {
     // returns jan of each year to mark timeline
     return yearMarkers;
 }
-
-const renderTooltip = (props) => (
-    <Tooltip id="button-tooltip" {...props}>
-        <b>Mobile:</b> Swipe left and right to move through the timeline or
-        press on a time period. <b>Desktop:</b> Left and right arrow on keyboard
-        can navigate the timeline as well as hovering over a time period.
-    </Tooltip>
-);
-
-const renderTooltipPDF = (props) => (
-    <Tooltip id="button-tooltip" {...props}>
-        Download CV in PDF format.
-    </Tooltip>
-);
-
 function CV() {
     // window resizing
     const [svgWidth, setSvgWidth] = useState(
@@ -274,6 +258,7 @@ function CV() {
     const [initialClientY, setInitialClientY] = useState(0);
     const [finalClientY, setFinalClientY] = useState(0);
     const [currentlyHovered, setCurrentlyHovered] = useState(cvData.length - 1);
+    const [infoPopupHidden, setInfoPopupHidden] = useState(true);
     // register world map
     useEffect(() => {
         echarts.registerMap("world", world, {});
@@ -318,13 +303,15 @@ function CV() {
                 handleNextClick();
             } else if (e.code === "ArrowRight") {
                 handleBackClick();
+            } else if (e.code === "Escape" || e.code === "Esc") {
+                if (!infoPopupHidden) setInfoPopupHidden(!infoPopupHidden);
             }
         };
         document.addEventListener("keydown", handleKeydown);
         return () => {
             document.removeEventListener("keydown", handleKeydown);
         };
-    }, [currentlyHovered]);
+    }, [currentlyHovered, infoPopupHidden]);
     // mouse hover over timeline
     const handleLineMouseEnter = (line: number) => {
         setCurrentlyHovered(line);
@@ -366,11 +353,27 @@ function CV() {
         setInitialClientX(0);
         setInitialClientY(0);
     };
+    const onInfoClick = () => {
+        setInfoPopupHidden(!infoPopupHidden);
+    }
     const yearMarkers: { year: number; position: number }[] = parseData();
     const svgHeight = 2 * height;
     const reverseCvData = [...cvData].reverse();
     return (
         <>
+            <div className={"h-screen w-screen bg-smoke fixed top-0 left-0 z-50 items-center justify-center" + (infoPopupHidden ? " hidden" : " flex")} onClick={onInfoClick}>
+                <div className="bg-gray-200 h-92 w-40 rounded-sm p-2">
+                    <b>Mobile:</b>
+                    <br/>
+                    Swipe left and right to move through the timeline or
+                    press on a time period. 
+                    <br/>
+                    <b>Desktop:</b>
+                    <br/>
+                    Left and right arrow on keyboard
+                    can navigate the timeline as well as hovering over a time period.
+                </div>
+            </div>
             <div className="diagonal-box cv">
                 <div
                     id="cv"
@@ -383,70 +386,69 @@ function CV() {
                     }}
                 >
                     <div className="row justify-center">
-                        <h2 className=" h-20 text-center text-white font-bold">timeline</h2>
+                        <h2 className=" h-20 text-center text-3xl text-white font-bold">timeline</h2>
                     </div>
-                    <div className="row">
-                        <div id="timeline-div" className="timeline-div col-4">
-                            <Row className="mx-0">
-                                <OverlayTrigger
-                                    placement="right"
-                                    delay={{ show: 250, hide: 400 }}
-                                    overlay={renderTooltip}
+                    <div className="row-span-full grid grid-cols-3">
+                        <div id="timeline-div" className="timeline-div col-span-1">
+                            <div className="ml-0 mr-1 md:mr-0 row-span-full grid grid-cols-5">
+                                <button
+                                    className="hover:bg-blue-600 bg-blue-500 hover:text-gray-300 font-semibold text-white py-2 md:px-4 border border-blue-500 hover:border-transparent rounded col-span-2 md:col-span-1"
+                                    style={{
+                                        flex: 1,
+                                        marginTop: "1vh",
+                                        marginRight: "1px",
+                                    }}
+                                    onClick={onInfoClick}
+                                    title="
+                                    Mobile:
+                                    Swipe left and right to move through the timeline or
+                                    press on a time period. 
+                                    Desktop:
+                                    Left and right arrow on keyboard can
+                                    navigate the timeline as well as hovering over a time period."
                                 >
-                                    <Button
-                                        variant="info"
-                                        style={{
-                                            flex: 1,
-                                            marginTop: "1vh",
-                                            marginRight: "1px",
-                                        }}
-                                    >
-                                        <i>i</i>
-                                    </Button>
-                                </OverlayTrigger>
-                                <OverlayTrigger
-                                    placement="right"
-                                    delay={{ show: 250, hide: 400 }}
-                                    overlay={renderTooltipPDF}
+                                    <i>i</i>
+                                </button>
+                                <a
+                                    className="hover:bg-gray-500 bg-gray-200 text-blue-600 hover:text-white font-semibold py-2 md:px-4 border border-blue-500 hover:border-transparent rounded col-span-3 md:col-span-4 text-center"
+                                    style={{
+                                        flex: 6,
+                                        marginTop: "1vh",
+                                    }}
+                                    href={CVPDF}
+                                    target="_blank"
+                                    title="Download CV in PDF format."
                                 >
-                                    <Button
-                                        variant="secondary"
-                                        style={{
-                                            flex: 6,
-                                            marginTop: "1vh",
-                                        }}
-                                        href={CVPDF}
-                                        target="_blank"
-                                    >
-                                        <i>PDF</i>
-                                    </Button>
-                                </OverlayTrigger>
-                            </Row>
-                            <Row className="mx-0">
-                                <Button
+                                    <i>PDF</i>
+                                </a>
+                            </div>
+                            <div className="ml-0 mr-1 md:mr-0 row-span-full grid grid-cols-2">
+                                <button
                                     onClick={handleNextClick}
-                                    variant="secondary"
+                                    className="bg-gray-300 hover:bg-gray-400 text-gray-800 hover:text-white font-bold py-2 px-4 rounded-l col-span-1"
                                     style={{
                                         flex: 3,
                                         marginTop: "5px",
                                         marginBottom: "1vh",
                                         marginRight: "1px",
                                     }}
+                                    title="Go forward in time"
                                 >
                                     {"<"}
-                                </Button>
-                                <Button
+                                </button>
+                                <button
                                     onClick={handleBackClick}
-                                    variant="primary"
+                                    className="bg-gray-300 hover:bg-gray-400 text-gray-800 hover:text-white font-bold py-2 px-4 rounded-r col-span-1"
                                     style={{
                                         flex: 3,
                                         marginTop: "5px",
                                         marginBottom: "1vh",
                                     }}
+                                    title="Go back in time"
                                 >
                                     {">"}
-                                </Button>
-                            </Row>
+                                </button>
+                            </div>
                             <svg className="-ml-5 " height={svgHeight} width={svgWidth}>
                                 <line
                                     className="timeline-line"
@@ -502,11 +504,11 @@ function CV() {
                         </div>
                         <div 
                             id="info-div" 
-                            className={"info-div text-xs md:text-sm lg:text-base md:pl-3 md:pr-3 col-8"}
+                            className={"info-div text-xs md:text-sm lg:text-base md:pl-3 md:pr-3 col-span-2"}
                             style={{}}
                             >
-                            <div className="items-center content-center h-1/6 grid grid-cols-3 gap-2 shadow-smYellow md:shadow-mdYellow border-white border-2 border-solid">
-                                <div className="logo-div h-full flex content-center justify-center items-center">
+                            <div className="h-1/6 row-span-full grid grid-cols-3 gap-1 shadow-smYellow md:shadow-mdYellow border-white border-2 border-solid">
+                                <div className="logo-div h-full flex content-center justify-center items-center col-span-1 self-center">
                                     <img
                                         src={require("../../../Images/Logos/" +
                                             reverseCvData[currentlyHovered].image +
@@ -515,13 +517,13 @@ function CV() {
                                         alt=""
                                     />
                                 </div>
-                                <div className="title-company">
+                                <div className="title-company col-span-1 self-center">
                                     <span className="para">
                                         <div className="-mb-0 md:mb-5 font-bold">{reverseCvData[currentlyHovered].title}</div>
                                         <div>{reverseCvData[currentlyHovered].company}</div>
                                     </span>
                                 </div>
-                                <div className="">
+                                <div className="col-span-1 self-center">
                                     <span className="para">
                                         <div className="-mb-0 md:mb-5 italic">
                                             {reverseCvData[currentlyHovered].startDate}{" "}

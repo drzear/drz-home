@@ -1,5 +1,4 @@
 import React from "react";
-import Form from "react-bootstrap/Form";
 import "./ThemeSwitch.css";
 
 interface ThemeProps {
@@ -55,18 +54,8 @@ export default class ThemeSwitch extends React.Component<
     };
     render() {
         return (
-            <Form className="switchForm">
-                <Form.Check
-                    type="switch"
-                    id="light-switch"
-                    className="custom-switch"
-                    // label={this.state.themeLabel}
-                    label=""
-                    onClick={this.handleThemeClick}
-                    checked={this.state.checkedBool}
-                    readOnly
-                />
-            </Form>
+            <>
+            </>
         );
     }
 }

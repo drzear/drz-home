@@ -1,20 +1,18 @@
 import React from "react";
-import { Col, Container, Row } from "react-bootstrap";
 import "./Contact.css";
 
 function Contact() {
     return (
         <>
             <div className="diagonal-box contact">
-                <Container id="contact" className="contact-container content contact">
-                    <Row className="justify-content: center">
-                        <Col>
-                            <h2 className="text-center mb-3">contact</h2>
-                        </Col>
-                    </Row>
-                    <Row>
-                        <Col className="justify-content-center">
-                            <div className="flex justify-content-center">
+                <div id="contact" className="contact-container content contact container">
+                    <div className="justify-center row-span-full">
+                        <div>
+                            <h2 className="text-center text-3xl font-bold mb-3">contact</h2>
+                        </div>
+                    </div>
+                    <div className="row-span-full grid grid-cols-3">
+                            <div className="flex justify-center">
                                 <a
                                     href="https://www.linkedin.com/in/david-zear-68244910/"
                                     target="_blank"
@@ -28,10 +26,7 @@ function Contact() {
                                     />
                                 </a>
                             </div>
-                        </Col>
-                        <br />
-                        <Col className="justify-content-center">
-                            <div className="flex justify-content-center">
+                            <div className="flex justify-center">
                                 <a
                                     href="https://github.com/drzear"
                                     target="_blank"
@@ -45,10 +40,7 @@ function Contact() {
                                     />
                                 </a>
                             </div>
-                        </Col>
-                        <br />
-                        <Col className="justify-content-center">
-                            <div className="flex justify-content-center">
+                            <div className="flex justify-center">
                                 <a
                                     href="mailto:drzear@gmail.com"
                                     target="_blank"
@@ -62,9 +54,8 @@ function Contact() {
                                     />
                                 </a>
                             </div>
-                        </Col>
-                    </Row>
-                </Container>
+                    </div>
+                </div>
             </div>
         </>
     );

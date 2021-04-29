@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { Row, Col, Button, Tooltip, OverlayTrigger } from "react-bootstrap";
 import ReactEcharts from "echarts-for-react";
 import echarts from "echarts";
 import "./USACovidDashboard.css";
@@ -332,15 +331,15 @@ const getUSALineEchartOption = (
 };
 
 const renderTooltip = (props) => (
-    <Tooltip id="button-tooltip" {...props}>
+    <div id="button-tooltip" {...props}>
         Click a state in the map to add to line chart below.
-    </Tooltip>
+    </div>
 );
 
 const renderTooltipLineToggle = (props) => (
-    <Tooltip id="button-tooltip" {...props}>
+    <div id="button-tooltip" {...props}>
         Toggle between comparing states or adding them together.
-    </Tooltip>
+    </div>
 );
 
 function USACovidDashboard(props) {
@@ -433,18 +432,18 @@ function USACovidDashboard(props) {
     // );
     return (
         <>
-            <Row className="echart-title">
-                <Col>USA Covid-Related Deaths per 100,000</Col>
-            </Row>
-            <Row className="echart-subtitle">
-                <Col>
+            <div className="echart-title">
+                <div>USA Covid-Related Deaths per 100,000</div>
+            </div>
+            <div className="echart-subtitle">
+                <div>
                     <a href="https://data.cdc.gov/NCHS/Weekly-Counts-of-Deaths-by-State-and-Select-Causes/muzy-jte6">
                         Data from the US CDC as of 2020-11-08
                     </a>
-                </Col>
-            </Row>
-            <Row>
-                <Col>
+                </div>
+            </div>
+            <div>
+                <div>
                     <div className="" style={{ height: "25vh" }}>
                         <ReactEcharts
                             option={getUSAMapEchartOption(props.theme)}
@@ -453,69 +452,57 @@ function USACovidDashboard(props) {
                             onEvents={onMapEvents}
                         />
                     </div>
-                </Col>
-            </Row>
-            <Row>
-                <Col>
-                    <OverlayTrigger
-                        placement="top"
-                        delay={{ show: 250, hide: 400 }}
-                        overlay={renderTooltip}
-                    >
-                        <Button
-                            variant={btnOutline + "info"}
-                            style={{
-                                marginRight: "10px",
-                                marginBottom: "10px",
-                            }}
-                        >
-                            <i>i</i>
-                        </Button>
-                    </OverlayTrigger>
-                    <OverlayTrigger
-                        placement="top"
-                        delay={{ show: 250, hide: 400 }}
-                        overlay={renderTooltipLineToggle}
-                    >
-                        <Button
-                            variant={btnOutline + "warning"}
-                            style={{
-                                marginRight: "10px",
-                                marginBottom: "10px",
-                            }}
-                            onClick={combineStatesButton}
-                        >
-                            {lineStatesCombined
-                                ? "Compare States"
-                                : "Combine States"}
-                        </Button>
-                    </OverlayTrigger>
-                    <Button
+                </div>
+            </div>
+            <div>
+                <div>
+                    <button
+                        className={btnOutline + "info"}
                         style={{
                             marginRight: "10px",
                             marginBottom: "10px",
                         }}
-                        variant={btnOutline + "primary"}
+                    >
+                        <i>i</i>
+                    </button>
+                    <button
+                        className={btnOutline + "warning"}
+                        style={{
+                            marginRight: "10px",
+                            marginBottom: "10px",
+                        }}
+                        onClick={combineStatesButton}
+                    >
+                        {lineStatesCombined
+                            ? "Compare States"
+                            : "Combine States"}
+                    </button>
+                    <button
+                        style={{
+                            marginRight: "10px",
+                            marginBottom: "10px",
+                        }}
+                        className={btnOutline + "primary"}
                         onClick={showStatesButton}
                     >
                         {showStates ? "Hide States" : "Show States"}
-                    </Button>
-                    <Button
+                    </button>
+                    <button
                         style={{
                             marginRight: "10px",
                             marginBottom: "10px",
                         }}
-                        variant={btnOutline + "primary"}
+                        className={btnOutline + "primary"}
                         onClick={clearSelectionButton}
                     >
                         Clear Selection
-                    </Button>
-                </Col>
-            </Row>
+                    </button>
+                </div>
+            </div>
             {showStates && (
                 <>
-                    <Row>
-                        <Col>
+                    <div>
+                        <div>
                             {usaStates
                                 .filter(
                                     (element) =>
@@ -525,68 +512,68 @@ function USACovidDashboard(props) {
                                 )
                                 .map((el, i) => {
                                     return (
-                                        <Button
+                                        <button
                                             style={{
                                                 marginRight: "1px",
                                                 marginBottom: "1px",
                                             }}
-                                            variant={btnOutline + "secondary"}
+                                            className={btnOutline + "secondary"}
                                             onClick={() => addState(el.State)}
                                             key={i}
                                         >
                                             {el.State}
-                                        </Button>
+                                        </button>
                                     );
                                 })}
-                        </Col>
-                        <Col>
+                        </div>
+                        <div>
                             {selectionStates.map((el, i) => {
                                 return (
-                                    <Button
+                                    <button
                                         style={{
                                             marginRight: "1px",
                                             marginBottom: "1px",
                                         }}
-                                        variant={btnOutline + "success"}
+                                        className={btnOutline + "success"}
                                         onClick={() => removeState(el)}
                                         key={i}
                                     >
                                         {el}
-                                    </Button>
+                                    </button>
                                 );
                             })}
-                        </Col>
-                    </Row>
+                        </div>
+                    </div>
                 </>
             )}
             {!showStates && (
                 <>
-                    <Row>
-                        <Col>
+                    <div>
+                        <div>
                             {selectionStates.map((el, i) => {
                                 return (
-                                    <Button
+                                    <button
                                         style={{
                                             marginRight: "1px",
                                             marginBottom: "1px",
                                         }}
-                                        variant={btnOutline + "success"}
+                                        className={btnOutline + "success"}
                                         onClick={() => removeState(el)}
                                         key={i}
                                     >
                                         {el}
-                                    </Button>
+                                    </button>
                                 );
                             })}
-                        </Col>
-                    </Row>
+                        </div>
+                    </div>
                 </>
             )}
-            <Row className="echart-title">
-                <Col>Causes of Death (per 100,000)</Col>
-            </Row>
-            <Row>
-                <Col>
+            <div className="echart-title">
+                <div>Causes of Death (per 100,000)</div>
+            </div>
+            <div>
+                <div>
                     <div style={{ height: "50vh" }}>
                         <ReactEcharts
                             // option={USALineEchartOption}
@@ -601,8 +588,8 @@ function USACovidDashboard(props) {
                             className="covid-usa-timeline"
                         />
                     </div>
-                </Col>
-            </Row>
+                </div>
+            </div>
         </>
     );
 }

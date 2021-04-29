@@ -33,7 +33,7 @@ function Header() {
     }, [stickyPosition, bgColor, bgColorTint]);
     useEffect(() => {
         const handleResize = () => {
-            window.scrollTo(0, 0);
+            // window.scrollTo(0, 0);
             setTimeout(() => setStickyPosition((document.getElementById("navbar")?.offsetTop || 0).valueOf()),0);
         };
         setTimeout(() => setStickyPosition((document.getElementById("navbar")?.offsetTop || 0).valueOf()), 0);
@@ -59,7 +59,7 @@ function Header() {
             <nav 
                 id="navbar" 
                 className={"flex items-top justify-center z-10 w-full h-28 pt-6"
-                + (scrolled ? ' shadow-sm' : '')
+                + (scrolled ? ' shadow-lg' : '')
                 }
                 >
                 <div className={"z-50 absolute flex justify-center rounded-full bg-gray-400 transform duration-1000 transition-all ease-out w-44 h-44 cursor-pointer" 

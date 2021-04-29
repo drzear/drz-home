@@ -11,9 +11,9 @@ function About () {
     return (
         <>
             <div className="diagonal-box about">
-                <div id="about" className="about-div container content about">
-                    <h3 className="about-h">about me</h3>
-                    <p className="about-para">
+                <div id="about" className="container content about">
+                    <h3 className="text-3xl font-bold text-center pt-4 pb-3">about me</h3>
+                    <p className="">
                         I graduated from the University of Iowa in 2007 with a B.S. in Biology. From 2008 to 20015 I worked a variety 
                         of biology-related jobs, trying to figure out what I enjoy doing. 
                         I relocated to Sweden with my wife in 2017 and decided to use the change of scenery to change fields
@@ -46,8 +46,8 @@ function About () {
                         </a>{" "}
                         games, and learn new things.
                     </p>
-                    <h3 className="about-h">about this site</h3>
-                    <p className="about-para">
+                    <h3 className="text-3xl font-bold text-center pt-4 pb-3">about this site</h3>
+                    <p className="">
                         This site was made using{" "}
                         <a
                             target="_blank"
@@ -74,8 +74,7 @@ function About () {
                             title="Tailwind css"
                         >
                             Tailwindcss
-                        </a>{" "}
-                        (right now it's a mix of Bootstrap and Tailwind since it started with Bootstrap), and{" "}
+                        </a>, and{" "}
                         <a
                             target="_blank"
                             rel="noopener noreferrer"
