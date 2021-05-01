@@ -2,47 +2,42 @@ import React, { useEffect, useState } from "react";
 import "./Header.css";
 
 function Header() {
-    const [scrolled, setScrolled] = useState(false);
-    const [stickyPosition, setStickyPosition] = useState(0);
+    const [sticky, setSticky] = useState(false);
     const [bgColorTint, setBgColorTint] = useState(100);
     const [bgColor, setBgColor] = useState(0);
-
+    const ref = React.createRef<HTMLDivElement>();
     useEffect(() => {
+        const cachedRef = ref.current;
+        const observer = new IntersectionObserver(
+            ([e]) => setSticky(e.intersectionRatio < 1),
+            { 
+                rootMargin: '-1px 0px 0px 0px',
+                threshold: [1] }
+        );
+        const observe = (ref): void => {
+            if (ref) {
+                observer.observe(ref);
+            }
+        }
+        observe(cachedRef);
+        const unObserve = (ref): void => {
+            if (ref) {
+                observer.unobserve(ref);
+            }
+        }
+
         const listenToScroll = () => {
-            let navbar = document.getElementById("navbar");
             const height = window.innerHeight|| document.documentElement.clientHeight|| document.body.clientHeight;
             setBgColorTint(Math.max(80, 100 - (Math.floor(window.pageYOffset / height * 100) / 2)));
             setBgColor((Math.floor(window.pageYOffset / height * 100) * 2));
             document.documentElement.style.setProperty('--dynColor', 'hsl(' + bgColor + ', 100%, ' + bgColorTint + '%)');
-            if (window.pageYOffset > stickyPosition) {
-                navbar?.classList.add("fixed");
-                navbar?.classList.add("top-0");
-                navbar?.classList.add("sticky-info");
-                setTimeout(() => setScrolled(true) , 0)
-            } else {
-                navbar?.classList.remove("fixed");
-                navbar?.classList.remove("top-0");
-                navbar?.classList.remove("sticky-info");
-                setTimeout(() => setScrolled(false) , 0)
-            }
         }
         window.addEventListener('scroll', listenToScroll);
         return () => {
             window.removeEventListener('scroll', listenToScroll);
+            unObserve(cachedRef);
         }
-    }, [stickyPosition, bgColor, bgColorTint]);
-    useEffect(() => {
-        const handleResize = () => {
-            // window.scrollTo(0, 0);
-            setTimeout(() => setStickyPosition((document.getElementById("navbar")?.offsetTop || 0).valueOf()),0);
-        };
-        setTimeout(() => setStickyPosition((document.getElementById("navbar")?.offsetTop || 0).valueOf()), 0);
-        window.addEventListener("resize", handleResize);
-        return () => {
-            window.removeEventListener("resize", handleResize);
-        };
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    }, [bgColor, bgColorTint, ref]);
     const scrollToLocation = (div: string) => {
         document.getElementById(div)?.scrollIntoView();
     };
@@ -58,27 +53,28 @@ function Header() {
             </div>
             <nav 
                 id="navbar" 
-                className={"flex items-top justify-center z-10 w-full h-28 pt-6"
-                + (scrolled ? ' shadow-lg' : '')
+                ref={ref}
+                className={"flex items-top justify-center z-10 w-full h-28 pt-6 sticky top-0"
+                + (sticky ? ' shadow-lg' : '')
                 }
                 >
                 <div className={"z-50 absolute flex justify-center rounded-full bg-gray-400 transform duration-1000 transition-all ease-out w-44 h-44 cursor-pointer" 
-                    + (scrolled ? ' -translate-x-34 -translate-y-15 hover:bg-red-400 shadow-m scale-50' : ' hover:bg-red-400')
+                    + (sticky ? ' -translate-x-34 -translate-y-15 hover:bg-red-400 shadow-m scale-50' : ' hover:bg-red-400')
                     + ' bg-workPhoto bg-contain'}
                     onClick={() => scrollToLocation('home')}
                     ></div>
                 <div className={"z-40 absolute flex justify-center items-center bg-gray-400 w-20 h-20 transform transition-all ease-out duration-1000 cursor-pointer" 
-                    + (scrolled ? ' -translate-x-11 -translate-y-3 hover:bg-red-400 hover:scale-110 shadow-m' : ' scale-0 hover:bg-red-400 hover:scale-110 ')
+                    + (sticky ? ' -translate-x-11 -translate-y-3 hover:bg-red-400 hover:scale-110 shadow-m' : ' scale-0 hover:bg-red-400 hover:scale-110 ')
                     + ' bg-hobbit bg-cover'}
                     onClick={() => scrollToLocation('cv')}
                     ></div>
                 <div className={"z-20 absolute flex justify-center items-center bg-gray-600 w-20 h-20 transform transition-all ease-out duration-1000 cursor-pointer" 
-                    + (scrolled ? ' translate-x-11 -translate-y-3 hover:bg-red-600 hover:scale-110 shadow-m' : ' translate-x-12 scale-0 hover:bg-red-600 hover:-translate-x-12 ')
+                    + (sticky ? ' translate-x-11 -translate-y-3 hover:bg-red-600 hover:scale-110 shadow-m' : ' translate-x-12 scale-0 hover:bg-red-600 hover:-translate-x-12 ')
                     + ' bg-kaikoura bg-cover'}
                     onClick={() => scrollToLocation('about')}
                     ></div>
                 <div className={"z-0 absolute flex justify-center items-center bg-gray-800 w-20 h-20 transform transition-all ease-out duration-1000 cursor-pointer" 
-                    + (scrolled ? ' translate-x-33 -translate-y-3 hover:bg-red-800 hover:scale-110 shadow-m' : ' scale-0 hover:bg-red-800 hover:translate-x-12 ')
+                    + (sticky ? ' translate-x-33 -translate-y-3 hover:bg-red-800 hover:scale-110 shadow-m' : ' scale-0 hover:bg-red-800 hover:translate-x-12 ')
                     + ' bg-hills bg-cover'}
                     onClick={() => scrollToLocation('contact')}
                     ></div>
