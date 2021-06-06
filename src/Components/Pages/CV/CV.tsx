@@ -417,6 +417,7 @@ function CV() {
                                     }}
                                     href={CVPDF}
                                     target="_blank"
+                                    rel="noreferrer"
                                     title="Download CV in PDF format."
                                 >
                                     <i>PDF</i>
@@ -561,7 +562,7 @@ function CV() {
                                     <SlideShow data={reverseCvData[currentlyHovered]} />
                                 )}
                             </div>
-                            <div id="map-div" className="map-div shadow-smYellow md:shadow-mdYellow border-white border-2 border-solid grid h-1/6">
+                            <div id="map-div" className="map-div shadow-smYellow md:shadow-mdYellow border-white border-2 border-solid grid h-auto md:h-1/6">
                                 <ReactEcharts
                                     option={getEchartOption(
                                         reverseCvData[currentlyHovered]

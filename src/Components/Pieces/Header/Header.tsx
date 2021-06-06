@@ -80,7 +80,7 @@ function Header() {
                     ></div>
             </nav>
             <div 
-                className={"w-full flex justify-center items-start content-info"}
+                className={"w-full flex justify-center items-start content-info pt-24 px-6"}
                 >
                 <Info />
             </div>

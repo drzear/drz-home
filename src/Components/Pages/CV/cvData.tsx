@@ -367,7 +367,6 @@ export const cvData: cvDataInt[] = [
             "• Focus on quantitative analysis of ecological systems.",
             "• Experience in writing scientific papers and presenting research.",
             "• Dean's List",
-            "",
             "Course highlights: statistics, population genetics & molecular evolution, organic chemistry, phylogenetics, and ecology.",
             "",
             "Publication: Ahmed Moustafa, ..., David Zear, ..., Debashish Bhattacharya. A phylogenomic approach for studying plastid endosymbiosis. Genome Informatics 21: 165-176 (2008) 165. PMID: 19425156.",
